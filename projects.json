@@ -1,0 +1,30 @@
+{
+    "id": 123,
+    "user_name": "SPJ",
+    "category": "Web App",
+    "total_hours": 132.34,
+    "unpaid_hours": 30.34,
+    "devlogs": [
+        {
+            "id": 1,
+            "date": "",
+            "time": "12.2",
+            "devlog_text": "",
+            "images_url": [] 
+        },
+        {
+            "id": 2,
+            "date": "",
+            "time": "31.9",
+            "devlog_text": "",
+            "images_url": [] 
+        },
+        {
+            "id": 3,
+            "date": "",
+            "time": "25.5",
+            "devlog_text": "",
+            "images_url": [] 
+        }
+    ]
+}

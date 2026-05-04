@@ -1,0 +1,7 @@
+User creates a new project
+Devlogs -> add hours to both total and unpaid
+User ships the projects
+ |
+ --> If approved, set the unpaid hours to zero, and add it to the voting queue (votes.json)
+ |
+ --> If rejected, show ship status as rejected
