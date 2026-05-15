@@ -4,6 +4,8 @@ import Image from 'next/image'
 import React from 'react'
 import Link from 'next/link'
 import ProjectBanner from '@/components/ProjectBanner'
+import Devlog from '@/components/Devlog'
+import { FaBook } from 'react-icons/fa'
 
 const page = async ({ params }) => {
   const { id } = await params
@@ -15,22 +17,18 @@ const page = async ({ params }) => {
   })
 
   const { projectData, canShip, isCurrentUserCreated, shipEvents } = await res.json()
-  console.log(canShip)
+  console.log(projectData.devlogs[0].devlog_images[0])
   const [hours, minutes] = hoursConverter(projectData.total_hours)
   return (
     <div className='p-5'>
       <ProjectBanner canShip={canShip} title={projectData.project_name} devlogs={projectData.devlogs.length} desc={projectData.project_desc} demo={projectData.project_demo} repo={projectData.project_repo} hours={hours} minutes={minutes} image={projectData.banner_url}
         user={projectData.user_name} />
-      {projectData.banner_url ? <Image alt="project banner" src={projectData.banner_url} width={1000} height={120} unoptimized /> : 'No image'}
-      <h1 className='text-xl font-medium'>{projectData.project_name}</h1>
-      <p>{projectData.project_desc}</p>
-      <p>Hours Logged: {hours} hours and {minutes} minutes</p>
-      <p>By: {projectData.user_name}</p>
-      {isCurrentUserCreated && <Link href={`/projects/devlog/${id}`}>Add devlog</Link>}
-      {shipEvents.map((data, i) => (
-        <div key={i}>
-          <p>Text: {data.ship_text}</p>
-          <p>Shipped On: {data.created_at}</p>
+      <div className='mx-auto  mt-6 flex max-w-250'>
+        <Link href={`/projects/devlog/${id}`} className={`flex text-[rgb(245,216,198)] max-w-55 border-4 bg-[rgb(78,44,51)] border-[hsl(22.59,34.14%,51.18%)] justify-center items-center py-5 px-8 text-xl rounded-2xl h-13 gap-2 w-full`}><FaBook /> Add Devlog </Link>
+      </div>
+      {projectData.devlogs.reverse().map((data, i) => (
+        <div className='w-full mt-8' key={i}>
+          <Devlog user={projectData.user_name} project={projectData.project_name} text={data.devlog_texts} images={data.devlog_images} hours={data.hours} />
         </div>
       ))}
     </div>

@@ -13,13 +13,13 @@ const ProjectBanner = ({ image, title, desc, repo, demo, hours, user, devlogs, m
           alt='project image'
           width={500}
           height={200}
-          className='max-w-7xl mx-auto h-auto object-cover object-top'
+          className='sm:max-w-7xl xs:max-w-5xl max-w-50 mx-auto h-auto object-cover object-top'
         />
       </div>
       <div className='flex mt-6 px-3 items-center '>
-        <div className='text-[2.4rem] leading-tight flex-1 font-semibold text-[rgb(249,229,197)]'>
+        <div className='md:text-[2.4rem] text-[2.0rem] leading-tight flex-1 font-semibold text-[rgb(249,229,197)]'>
           {title}
-          <div className='text-[18.5px] text-[rgb(215,181,147)]'>
+          <div className='md:text-[18.5px] text-[17px] text-[rgb(215,181,147)]'>
             Created By: {user}
           </div>
         </div>
@@ -30,17 +30,17 @@ const ProjectBanner = ({ image, title, desc, repo, demo, hours, user, devlogs, m
         </div>
 
       </div>
-      <div className='flex px-3 text-[19px] mt-3 font-semibold text-[rgb(215,181,147)] gap-10'>
+      <div className='flex px-3 md:text-[19px] text-[15px] mt-3 font-semibold text-[rgb(215,181,147)] gap-10'>
         <span className='flex gap-1 items-center'><FaClock /> Hours: {hours}h {minutes}m</span>
         <span className='flex gap-1 items-center'><FaFileAlt /> Devlogs: {devlogs}</span>
       </div>
-      <div className='px-3 text-[1.3rem] mt-3 leading-tight flex-1 font-semibold text-[rgb(249,229,197)]'>
+      <div className='px-3 md:text-[1.3rem] text-[1.15rem] mt-3 leading-tight flex-1 font-semibold text-[rgb(249,229,197)]'>
         {desc}
       </div>
-      <div className='grid px-3 gap-3 mt-4 grid-cols-3'>
-        <Link href={demo} className='flex text-[rgb(245,216,198)] bg-[rgb(78,44,51)] justify-center items-center py-5 px-8 text-xl rounded-2xl h-13 gap-2 w-full'><FaGlobe/> Demo</Link>
-        <Link href={repo} className='flex text-[rgb(245,216,198)] bg-[rgb(78,44,51)] justify-center items-center py-5 px-8 text-xl rounded-2xl h-13 gap-2 w-full'><FaGithub/> Repository</Link>
-        <Link href={'/'} className='flex text-[rgb(245,216,198)] bg-[rgb(78,44,51)] justify-center items-center py-5 px-8 text-xl rounded-2xl h-13 gap-2 w-full'><FaRocket/> Ship </Link>
+      <div className='grid px-3 gap-3 mt-4 sm:grid-cols-3 grid-cols-1'>
+        <Link href={demo} className='flex text-[rgb(245,216,198)] bg-[rgb(78,44,51)] justify-center items-center md:py-5 px-8 text-xl rounded-2xl h-13 gap-2 w-full'><FaGlobe/> Demo</Link>
+        <Link href={repo} className='flex text-[rgb(245,216,198)] bg-[rgb(78,44,51)] justify-center items-center md:py-5 px-8 text-xl rounded-2xl h-13 gap-2 w-full'><FaGithub/> Repository</Link>
+        <Link href={'/'} className={`flex ${canShip ? 'text-[rgb(245,216,198)] bg-[rgb(78,44,51)]':'pointer-events-none  text-[rgb(187,157,140)] bg-[rgb(133,94,101)]'} justify-center items-center py-5 px-8 text-xl rounded-2xl h-13 gap-2 w-full`}><FaRocket/> Ship </Link>
 
       </div>
     </div>

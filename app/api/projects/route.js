@@ -80,7 +80,7 @@ export async function GET(request) {
   if (userData != null) isCurrentUserCreated = projectData.user_name === userData.name 
   console.log('isCurrentUserCreated', isCurrentUserCreated)
   let canShip = false
-  if (projectData.project_demo && projectData.project_repo && projectData.total_hours > 0) canShip = true
+  if (projectData.project_demo !== '' && projectData.project_repo !== 0 && projectData.total_hours > 0) canShip = true
   return NextResponse.json({ projectData, canShip, shipEvents, isCurrentUserCreated })
 }
 
