@@ -87,6 +87,7 @@ const Page = () => {
                         multiple
                         onChange={handleImageChange}
                         className="text-sm"
+                        required
                     />
                     {devlog_previews.map((src, i) => (
                         <img key={i} src={src} className="w-20 h-20 object-cover rounded-lg border" />

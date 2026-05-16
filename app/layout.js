@@ -1,7 +1,8 @@
 import { Geist, Jua } from "next/font/google";
 import "./globals.css";
+import Sidebar from "@/components/Sidebar";
 
-const jua = Jua({ 
+const jua = Jua({
   weight: '400',
   subsets: ['latin'],
   display: 'swap',
@@ -13,18 +14,22 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html
-      lang="en"
-      className={`h-full ${jua.className} antialiased`}
-
-    >
-      <body className="min-h-full flex flex-col" style={{
+    <html lang="en" className={`h-full ${jua.className} antialiased`}>
+      <body className="h-full" style={{
         backgroundColor: "#e7d4b1",
         backgroundImage: `url("/bg-01.webp")`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         fontFamily: 'jua'
-      }}>{children}</body>
+      }}>
+        <div className="flex h-screen">
+          <Sidebar />
+
+          <main className="flex-1 ml-34 overflow-y-auto">
+            {children}
+          </main>
+        </div>
+      </body>
     </html>
   );
 }
