@@ -3,6 +3,7 @@ import Image from 'next/image'
 
 const Devlog = ({ user, project, text, images, hours }) => {
   const [hour, minutes] = hoursConverter(hours)
+  console.log(images)
   return (
     <div className='text-white tracking-tight leading-6 font-extrabold border-14 text-lg max-w-220 mx-auto shadow-sm border-[hsl(68,50%,71%)] rounded-3xl py-8 px-10 bg-[#73a541]'>
       <div className='flex gap-4 items-center'>
@@ -19,7 +20,7 @@ const Devlog = ({ user, project, text, images, hours }) => {
       <div className='my-3.5 leading-7 text-[19px]'>
         {text}
       </div>
-      <Image src={images[1]} alt='devlog_image' unoptimized className='w-full' height={400} width={700}/>
+      <Image src={images[0]} alt='devlog_image' unoptimized className='w-full' height={400} width={700}/>
     </div>
   )
 }

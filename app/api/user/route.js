@@ -37,6 +37,6 @@ export async function GET(request) {
     return NextResponse.json({ 'status': 500, 'error': 'Failed to fetch projects' })
   }
   let { data: userData, error } = await supabase.from('users').select('*').eq('hackclub_id', currentUser.user_id).single()
-  console.log(userData)
-  return NextResponse.json({ user: userData, projects: projectData, 'status': 200 })
+  let {data: userProjects, error: userProjectsError} = await supabase.from('projects').select().eq('user_id', currentUser.user_id)
+  return NextResponse.json({ user: userData, projects: projectData, userProjects, 'status': 200 })
 }
