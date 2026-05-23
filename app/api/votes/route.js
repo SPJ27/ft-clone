@@ -25,15 +25,15 @@ async function payoutUnpaidShips(supabase, hackclub_id) {
   let totalCookiesEarned = 0
 
   for (const ship of unpaidShips) {
-    if (!ship.votes_received || ship.votes_received.length === 0) continue
+    if (!ship.votes_recieved || ship.votes_recieved.length === 0) continue
 
-    const sum = ship.votes_received.reduce(
+    const sum = ship.votes_recieved.reduce(
       (acc, vote) =>
         acc + (vote.technicality ?? 0) + (vote.originality ?? 0) +
         (vote.usability ?? 0) + (vote.storytelling ?? 0),
       0
     )
-    const maxScore = ship.votes_received.length * 16
+    const maxScore = ship.votes_recieved.length * 16
     const multiplier = (sum / maxScore) * 30
     const cookiesEarned = multiplier * ship.hours
     totalCookiesEarned += cookiesEarned
@@ -41,7 +41,7 @@ async function payoutUnpaidShips(supabase, hackclub_id) {
     await supabase
       .from("ship_events")
       .update({ payout_status: true, multiplier })
-      .eq("ship_id", ship.ship_id)
+      .eq("id", ship.ship_id)
   }
 
   const { data: freshUser } = await supabase
@@ -88,12 +88,12 @@ export async function POST(request) {
   }
   console.log(votingData)
   const votes = votingData.votes + 1
-  const votes_received = [
+  const votes_recieved = [
     ...votingData.votes_recieved,
     { originality, technicality, usability, storytelling, feedback },
   ]
 
-  const newBalance = currentUser.balance - 1
+  const newBalance = currentUser.balance + 1
 
   const { error: balanceError } = await supabase
     .from("users")
@@ -107,8 +107,8 @@ export async function POST(request) {
   if (votes < 12) {
     const { error: updateError } = await supabase
       .from("ship_events")
-      .update({ votes, votes_received })
-      .eq("ship_id", ship_id)
+      .update({ votes, votes_recieved })
+      .eq("id", ship_id)
 
     if (updateError) {
       return NextResponse.json({ error: updateError.message }, { status: 400 })
@@ -121,18 +121,17 @@ export async function POST(request) {
     return NextResponse.json({ message: "vote recorded", votes, newBalance })
   }
 
-  const sum = votes_received.reduce(
+  const sum = votes_recieved.reduce(
     (acc, vote) => acc + vote.technicality + vote.originality + vote.usability + vote.storytelling,
     0
   )
-  const maxScore = votes_received.length * 16
-  const multiplier = (sum / maxScore) * 30
+  const multiplier = ((sum / (votes_recieved.length*9*4))) * 30
   const cookiesEarned = multiplier * votingData.hours
 
   const { error: shipUpdateError } = await supabase
     .from("ship_events")
-    .update({ payout_status: true, multiplier, votes, votes_received })
-    .eq("ship_id", ship_id)
+    .update({ payout_status: true, multiplier, votes, votes_recieved })
+    .eq("id", ship_id)
 
   if (shipUpdateError) {
     return NextResponse.json({ error: shipUpdateError.message }, { status: 400 })
@@ -164,7 +163,7 @@ export async function POST(request) {
 
   const { error: cookiesError } = await supabase
     .from("users")
-    .update({ cookies: projectUser.cookies + cookiesEarned })
+    .update({ cookies: Math.round(projectUser.cookies + cookiesEarned)})
     .eq("hackclub_id", projectData.user_id)
 
   if (cookiesError) {
