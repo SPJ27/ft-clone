@@ -21,15 +21,15 @@ const ProjectBanner = ({ id, banner_url: image, project_name: title, project_des
                 )}
             </div>
             <div className='flex mt-6 px-3 items-center'>
-                <div className='md:text-[2.4rem] text-[2.0rem] leading-tight flex-1 font-semibold text-[rgb(249,229,197)]'>
+                <div className='md:text-[2rem] text-[2.0rem] leading-tight flex-1 font-semibold text-[rgb(249,229,197)]'>
                     {title}
                 </div>
             </div>
-            <div className='flex px-3 md:text-[19px] text-[15px] mt-3 font-semibold text-[rgb(215,181,147)] gap-10'>
+            <div className='flex px-3 md:text-[14px] text-[15px] mt-1 font-semibold text-[rgb(215,181,147)] gap-10'>
                 <span className='flex gap-1 items-center'><FaClock /> Hours: {hours}h {minutes}m</span>
                 <span className='flex gap-1 items-center'><FaFileAlt /> Devlogs: {devlogs.length}</span>
             </div>
-            <div className='px-3 md:text-[1.3rem] text-[1.15rem] mt-3 leading-tight flex-1 font-semibold text-[rgb(249,229,197)]'>
+            <div className='px-3 md:text-[1.12rem] text-[1.15rem] mt-3 leading-tight flex-1 font-semibold text-[rgb(249,229,197)]'>
                 {project_desc.substring(0, 100).trimEnd()}...
             </div>
         </Link>
@@ -49,7 +49,7 @@ const page = async () => {
     console.log(userProjects)
     return (
         <div className='flex w-full items-center justify-center'>
-            <div className='w-full max-w-6xl  items-center'>
+            <div className='w-full max-w-4xl  items-center'>
                 <div className='bg-[hsl(214,39%,39%)] text-center max-w-lg mx-auto text-white text-4xl font-bold px-15 py-3 rounded-2xl mt-10   '>
                     My Projects
                 </div>

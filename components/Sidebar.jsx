@@ -33,40 +33,64 @@ const Sidebar = () => {
   }, [])
 
   return (
-    <div className='fixed left-12 top-1/2 -translate-y-1/2 group'>
-      <div className='w-30 group-hover:w-64 transition-[width] duration-300 ease-in-out bg-[#6199c2] text-[rgb(249,229,197)] flex flex-col rounded-2xl overflow-hidden h-170'>
-        <div className='flex flex-col flex-1 py-6'>
+    <>
+      <div className='hidden md:block fixed left-12 top-1/2 -translate-y-1/2 group'>
+        <div className='w-30 group-hover:w-64 transition-[width] duration-300 ease-in-out bg-[#6199c2] text-[rgb(249,229,197)] flex flex-col rounded-2xl overflow-hidden h-150'>
+          <div className='flex flex-col flex-1 py-6'>
+            {navItems.map(({ icon, label, to }) => {
+              const active = to === '/' ? pathname === '/' : pathname.startsWith(to)
+              return (
+                <Link
+                  href={to}
+                  key={label}
+                  className={`flex items-center py-4 text-center cursor-pointer whitespace-nowrap transition-colors duration-150 ${active ? 'bg-[hsl(214,39%,42%)]' : 'hover:bg-[hsl(214,39%,39%)]'}`}
+                >
+                  <span className='text-[30px] w-30 shrink-0 flex justify-center'>{icon}</span>
+                  <span className='text-[18px] font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-200 delay-100 overflow-hidden'>
+                    {label}
+                  </span>
+                </Link>
+              )
+            })}
+          </div>
+
+          <div className='relative bg-[rgb(190,75,83)] hover:bg-[rgb(170,60,68)] transition-colors rounded-b-2xl h-16 shrink-0 cursor-pointer flex items-center'>
+            <div className='w-30 shrink-0 flex justify-center'>
+              <div className='w-10 h-10 rounded-full bg-white flex items-center justify-center text-xl' />
+            </div>
+            {user && (
+              <div className='absolute left-24 opacity-0 group-hover:opacity-100 transition-opacity duration-200 delay-100'>
+                <p className='text-[20px] mt-1.5 font-medium leading-none'>{user.name}</p>
+                <p className='text-md opacity-70'>🍪 {user.cookies}</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div className='md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#6199c2] text-[rgb(249,229,197)]'>
+        <div className='flex flex-row items-center justify-between px-2'>
           {navItems.map(({ icon, label, to }) => {
             const active = to === '/' ? pathname === '/' : pathname.startsWith(to)
             return (
               <Link
                 href={to}
                 key={label}
-                className={`flex items-center py-4 text-center cursor-pointer whitespace-nowrap transition-colors duration-150 ${active ? 'bg-[hsl(214,39%,42%)]' : 'hover:bg-[hsl(214,39%,39%)]'
-                  }`}
+                className='flex items-center justify-center py-3 flex-1 cursor-pointer'
               >
-                <span className='text-[38px] w-30 shrink-0 flex justify-center'>{icon}</span>
-                <span className='text-[22px] font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-200 delay-100 overflow-hidden'>
-                  {label}
+                <span className={`text-[22px] flex items-center justify-center w-10 h-10 rounded-full transition-colors duration-150 ${active ? 'bg-[hsl(214,39%,32%)]' : 'hover:bg-[hsl(214,39%,39%)]'}`}>
+                  {icon}
                 </span>
               </Link>
             )
           })}
-        </div>
 
-        <div className='relative bg-[rgb(190,75,83)] hover:bg-[rgb(170,60,68)] transition-colors rounded-b-2xl h-16 shrink-0 cursor-pointer flex items-center'>
-          <div className='w-30 shrink-0 flex justify-center'>
-            <div className='w-10 h-10 rounded-full bg-white flex items-center justify-center text-xl' />
+          <div className='flex items-center justify-center py-3 flex-shrink-0 cursor-pointer'>
+            <div className='w-10 h-10 rounded-full bg-[rgb(190,75,83)] hover:bg-[rgb(170,60,68)] transition-colors flex items-center justify-center' />
           </div>
-          {user && (
-            <div className='absolute left-24 opacity-0 group-hover:opacity-100 transition-opacity duration-200 delay-100'>
-              <p className='text-[20px] mt-1.5 font-medium leading-none'>{user.name}</p>
-              <p className='text-md opacity-70'>🍪 {user.cookies}</p>
-            </div>
-          )}
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
