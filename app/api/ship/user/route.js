@@ -3,6 +3,39 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { getUser } from "../../projects/route";
 
+export async function GET(request) {
+  const currentUser = await getUser();
+  if (!currentUser) {
+    return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+  }
+
+  const { searchParams } = new URL(request.url);
+  const project_id = searchParams.get("project_id");
+
+  const supabase = createClient(await cookies());
+
+  let query = supabase
+    .from("ship_events")
+    .select("*, projects(project_name, user_id)")
+    .order("created_at", { ascending: false });
+
+  if (project_id) {
+    query = query.eq("project_id", project_id).limit(1).single();
+  }
+
+  const { data, error } = await query;
+
+  if (error && error.code === "PGRST116") {
+    return NextResponse.json({ data: null });
+  }
+
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 400 });
+  }
+
+  return NextResponse.json({ data });
+}
+
 export async function POST(request) {
   const currentUser = await getUser();
   if (!currentUser) {
@@ -31,8 +64,8 @@ export async function POST(request) {
     return NextResponse.json({ error: prevShipEventsError.message }, { status: 400 });
   }
 
-  const hasPendingApproval = prevShipEvents.some((e) => e.approved === 'PENDING');
-  const hasUnpaidApproval = prevShipEvents.some((e) => e.approved === 'APPROVED' && e.payout_status === false);
+  const hasPendingApproval = prevShipEvents.some((e) => e.approved === "PENDING");
+  const hasUnpaidApproval = prevShipEvents.some((e) => e.approved === "APPROVED" && e.payout_status === false);
 
   if (hasPendingApproval || hasUnpaidApproval) {
     return NextResponse.json(
@@ -48,7 +81,6 @@ export async function POST(request) {
     .single();
 
   if (error) {
-    console.log(error.message);
     return NextResponse.json({ error: error.message }, { status: 400 });
   }
 

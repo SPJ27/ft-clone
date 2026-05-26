@@ -10,6 +10,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "user-cdn.hackclub-assets.com",
       },
+      {
+        protocol: "https",
+        hostname: "encrypted-tbn1.gstatic.com",
+      },
     ],
   },
 };
