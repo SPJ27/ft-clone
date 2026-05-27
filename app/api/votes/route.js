@@ -89,9 +89,9 @@ export async function POST(request) {
   console.log(votingData)
   const votes = votingData.votes + 1
   const votes_recieved = [
-    ...votingData.votes_recieved,
-    { originality, technicality, usability, storytelling, feedback },
-  ]
+  ...(votingData.votes_recieved ?? []),
+  { originality, technicality, usability, storytelling, feedback },
+]
 
   const newBalance = currentUser.balance + 1
 
@@ -179,7 +179,13 @@ export async function POST(request) {
 
 export async function GET(request) {
   const user = await getUser()
-  if (!user) return NextResponse.json({ error: "unauthenticated" }, { status: 401 })
+
+  if (!user) {
+    return NextResponse.json(
+      { error: "unauthenticated" },
+      { status: 401 }
+    )
+  }
 
   const supabase = createClient(await cookies())
 
@@ -190,33 +196,43 @@ export async function GET(request) {
     .single()
 
   if (currentUserError || !currentUser) {
-    return NextResponse.json({ error: "user not found" }, { status: 404 })
+    return NextResponse.json(
+      { error: "user not found" },
+      { status: 404 }
+    )
   }
 
-  const { data: userProjects } = await supabase
-    .from("projects")
-    .select("id")
-    .eq("user_id", user.hackclub_id)
-
-  const ownProjectIds = userProjects ? userProjects.map((p) => p.id) : []
-
-  const query = supabase
+  if (currentUser.balance >= 0) {
+    return NextResponse.json(
+      { error: "balance is not negative" },
+      { status: 404 }
+    )
+  }
+  const { data: shipEvent, error } = await supabase
     .from("ship_events")
-    .select("*, projects(*)")
+    .select("*")
     .eq("payout_status", false)
     .eq("approved", "APPROVED")
+    // .neq("user_id", parseInt(user.hackclub_id))
     .order("created_at", { ascending: true })
     .limit(1)
-
-  if (ownProjectIds.length > 0) {
-    query.not("project_id", "in", `(${ownProjectIds.join(",")})`)
+    .single()
+  
+  if (error || !shipEvent) {
+    return NextResponse.json(
+      { error: "no projects available for voting" },
+      { status: 404 }
+    )
   }
 
-  const { data, error } = await query.single()
+  const { data: project } = await supabase
+    .from("projects")
+    .select("*")
+    .eq("id", shipEvent.project_id)
+    .single()
 
-  if (error || !data) {
-    return NextResponse.json({ error: "no projects available for voting" }, { status: 404 })
-  }
-
-  return NextResponse.json({ data })
+  return NextResponse.json({
+      shipEventId: shipEvent.id,   
+      project
+  })
 }

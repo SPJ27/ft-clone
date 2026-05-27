@@ -76,7 +76,7 @@ export async function POST(request) {
 
   const { data, error } = await supabase
     .from("ship_events")
-    .insert({ project_id, ship_text, hours: checkUser.unpaid_hours })
+    .insert({ project_id, ship_text, hours: checkUser.unpaid_hours, user_id: currentUser.hackclub_id })
     .select()
     .single();
 
