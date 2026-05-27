@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { redirect, useParams } from 'next/navigation'
 import { hoursConverter } from '@/lib/converter'
+import Image from 'next/image'
 
 const Page = () => {
     const params = useParams()
@@ -90,7 +91,7 @@ const Page = () => {
                         required
                     />
                     {devlog_previews.map((src, i) => (
-                        <img key={i} src={src} className="w-20 h-20 object-cover rounded-lg border" />
+                        <Image key={i} src={src} className="w-20 h-20 object-cover rounded-lg border" />
                     ))}
                 </div>
                 {error && <p className="text-sm text-red-500">{error}</p>}

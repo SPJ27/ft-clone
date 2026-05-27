@@ -2,7 +2,7 @@
 import { useParams } from 'next/navigation'
 import { useState } from 'react'
 
-const page = () => {
+const Page = () => {
     const [text, setText] = useState('')
     const params = useParams()
     const project_id = params.id
@@ -25,4 +25,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page

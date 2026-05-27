@@ -47,7 +47,7 @@ const ProjectBanner = ({ id, banner_url: image, project_name: title, project_des
   )
 }
 
-const page = async () => {
+const Page = async () => {
   const cookieStore = await cookies()
   const res = await fetch(`${process.env.API_BASE_URL}/api/user`, {
     headers: { Cookie: cookieStore.toString() },
@@ -77,4 +77,4 @@ const page = async () => {
   )
 }
 
-export default page
+export default Page

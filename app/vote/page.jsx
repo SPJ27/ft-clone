@@ -25,7 +25,7 @@ const StarRating = ({ value, onChange, color }) => {
   )
 }
 
-export default function VotePage() {
+export default function Page() {
   const [project, setProject] = useState(null)
   const [shipEventId, setShipEventId] = useState(null)
   const [loading, setLoading] = useState(true)

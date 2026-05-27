@@ -6,7 +6,7 @@ import ProjectBanner from '@/components/ProjectBanner'
 import Devlog from '@/components/Devlog'
 import { FaBook } from 'react-icons/fa'
 
-const page = async ({ params }) => {
+const Page = async ({ params }) => {
   const { id } = await params
   const cookieStore = await cookies()
   const res = await fetch(`${process.env.API_BASE_URL}/api/projects?project_id=${id}`, {
@@ -49,4 +49,4 @@ const page = async ({ params }) => {
   )
 }
 
-export default page
+export default Page
