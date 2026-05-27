@@ -1,5 +1,5 @@
 import { createClient } from "@/supabase/server"
-import { getUser } from "../projects/route"
+import {getUser} from '@/app/api/projects/route'
 import { cookies } from "next/headers"
 import { NextResponse } from "next/server"
 
