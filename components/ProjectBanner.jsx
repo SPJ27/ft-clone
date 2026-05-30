@@ -9,16 +9,17 @@ const statusConfig = {
   REJECTED: { label: 'Rejected',       classes: 'bg-red-500 text-white border border-red-500/40' },
 }
 
-const ProjectBanner = ({ id, image, title, desc, repo, demo, hours, user, devlogs, minutes, canShip, shipStatus }) => {
+const ProjectBanner = ({ id, image, title, desc, repo, demo, hours, user, devlogs, minutes, canShip, shipStatus, showShipButton=true }) => {
   const status = shipStatus ? statusConfig[shipStatus] : null
-
+  
   return (
-    <div className='text-white border-4 sm:border-14 max-w-210 mx-auto border-[hsl(22.59,34.14%,51.18%)] rounded-3xl p-2 sm:p-3 px-3 sm:px-5 bg-[#7b4942]'>
+    <div className='text-white border-4 sm:border-10 max-w-230 mx-auto border-[hsl(22.59,34.14%,51.18%)] rounded-2xl p-2 sm:p-3 px-3 sm:px-5 bg-[#7b4942]'>
       <div className='relative rounded-2xl overflow-hidden bg-[hsl(22.59,34.14%,51.18%)] h-36 sm:h-52'>
         <Image
           src={image}
           alt='project image'
           fill
+          unoptimized
           className='object-cover object-top'
         />
       </div>
@@ -44,10 +45,12 @@ const ProjectBanner = ({ id, image, title, desc, repo, demo, hours, user, devlog
       <div className='px-2 sm:px-3 text-[1rem] sm:text-[1.19rem] mt-3 leading-tight flex-1 font-medium text-[rgb(249,229,197)]'>
         {desc}
       </div>
-      <div className='grid px-2 sm:px-3 gap-3 mt-4 sm:grid-cols-3 grid-cols-1'>
-        <Link href={demo} className='flex text-[rgb(245,216,198)] bg-[rgb(78,44,51)] justify-center items-center py-4 sm:py-5 px-8 text-lg sm:text-xl rounded-2xl h-12 sm:h-13 gap-2 w-full'><FaGlobe /> Demo</Link>
-        <Link href={repo} className='flex text-[rgb(245,216,198)] bg-[rgb(78,44,51)] justify-center items-center py-4 sm:py-5 px-8 text-lg sm:text-xl rounded-2xl h-12 sm:h-13 gap-2 w-full'><FaGithub /> Repository</Link>
-        <Link href={`/projects/ship/${id}`} className={`flex ${canShip ? 'text-[rgb(245,216,198)] bg-[rgb(78,44,51)]' : 'pointer-events-none text-[rgb(187,157,140)] bg-[rgb(133,94,101)]'} justify-center items-center py-4 sm:py-5 px-8 text-lg sm:text-xl rounded-2xl h-12 sm:h-13 gap-2 w-full`}><FaRocket /> Ship</Link>
+      <div className={`grid px-2 sm:px-3 gap-3 mt-4  ${showShipButton ? 'sm:grid-cols-3 grid-cols-1' : 'sm:grid-cols-2 grid-cols-1'}`}>
+        <Link href={demo} className='flex text-[rgb(245,216,198)] bg-[rgb(78,44,51)] justify-center items-center py-4 sm:py-5 px-8 text-lg sm:text-xl rounded-lg h-12 sm:h-10 gap-2 w-full'><FaGlobe /> Demo</Link>
+        <Link href={repo} className='flex text-[rgb(245,216,198)] bg-[rgb(78,44,51)] justify-center items-center py-4 sm:py-5 px-8 text-lg sm:text-xl rounded-lg h-12 sm:h-10 gap-2 w-full'><FaGithub /> Repository</Link>
+        {showShipButton && (
+          <Link href={`/projects/ship/${id}`} className={`flex ${canShip ? 'text-[rgb(245,216,198)] bg-[rgb(78,44,51)]' : 'pointer-events-none text-[rgb(187,157,140)] bg-[rgb(133,94,101)]'} justify-center items-center py-4 sm:py-5 px-8 text-lg sm:text-xl rounded-lg h-12 sm:h-13 gap-2 w-full`}><FaRocket /> Ship</Link>
+        )}
       </div>
     </div>
   )

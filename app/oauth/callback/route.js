@@ -52,6 +52,7 @@ export async function GET(request) {
 
 
     const userData = await userRes.json()
+    
     if (!userRes.ok) {
       console.error("Failed to fetch user:", userData)
       return Response.json(

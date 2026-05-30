@@ -4,7 +4,7 @@ import { hoursConverter } from '@/lib/converter'
 import React, { useState, useEffect } from 'react'
 import ProjectBanner from '@/components/ProjectBanner'
 import { FaStar, FaPaperPlane } from 'react-icons/fa'
-
+import { useRouter } from 'next/navigation'
 const criteria = [
   { key: 'technicality', label: 'Technicality', desc: 'How technically impressive is this?', color: 'hsl(210, 80%, 65%)' },
   { key: 'originality', label: 'Originality', desc: 'How creative and unique is this?', color: 'hsl(280, 70%, 70%)' },
@@ -34,7 +34,7 @@ export default function Page() {
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState(null)
-
+  const router = useRouter()
   useEffect(() => {
     fetch('/api/votes')
       .then((r) => r.json())
@@ -65,6 +65,7 @@ export default function Page() {
       setError(e.message)
     } finally {
       setSubmitting(false)
+      router.refresh()
     }
   }
 
@@ -91,8 +92,8 @@ export default function Page() {
   const [hours, minutes] = hoursConverter(project.total_hours)
 
   return (
-    <div className=" min-h-screen">
-      <div className="px-23 max-w-275 mx-auto">
+    <div className=" min-h-screen ml-12">
+      <div className="px-23 max-w-280 mx-auto">
         <div className="bg-[hsl(214,39%,39%)] mb-5 tracking-wide text-center max-w-xs mx-auto text-white text-3xl font-bold px-13 py-2.5 rounded-2xl mt-10   ">
           Vote
         </div>
@@ -108,6 +109,7 @@ export default function Page() {
               repo={project.project_repo}
               hours={hours}
               minutes={minutes}
+              showShipButton={false}
               image={project.banner_url}
               user={project.user_name}
               shipStatus={null}
@@ -115,7 +117,7 @@ export default function Page() {
           </div>
           <div className="w-full lg:w-1/2 lg:sticky top-5">
             {submitted ? (
-              <div className="text-white border-4 sm:border-14 border-[hsl(22.59,34.14%,51.18%)] rounded-3xl p-8 bg-[#7b4942] flex flex-col items-center justify-center gap-4 min-h-60">
+              <div className="text-white border-4 sm:border-10 border-[hsl(22.59,34.14%,51.18%)] rounded-2xl p-8 bg-[#7b4942] flex flex-col items-center justify-center gap-4 min-h-60">
                 <div className="text-5xl">🍪</div>
                 <div className="text-2xl font-bold text-[rgb(249,229,197)]">
                   Vote submitted!
@@ -125,7 +127,7 @@ export default function Page() {
                 </div>
               </div>
             ) : (
-              <div className="text-white border-4 sm:border-14 border-[hsl(22.59,34.14%,51.18%)] rounded-3xl p-5 sm:p-8 bg-[#7b4942]">
+              <div className="text-white border-4 sm:border-14 border-[hsl(22.59,34.14%,51.18%)] rounded-2xl p-5 sm:p-8 bg-[#7b4942]">
                 <h2 className="text-2xl font-bold text-[rgb(249,229,197)] mb-1">
                   Scorecard
                 </h2>

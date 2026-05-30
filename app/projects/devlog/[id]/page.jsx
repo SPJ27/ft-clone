@@ -91,7 +91,7 @@ const Page = () => {
                         required
                     />
                     {devlog_previews.map((src, i) => (
-                        <Image key={i} src={src} className="w-20 h-20 object-cover rounded-lg border" />
+                        <Image key={i} height={80} width={80} alt='Devlog Image' src={src} className="w-20 h-20 object-cover rounded-lg border" />
                     ))}
                 </div>
                 {error && <p className="text-sm text-red-500">{error}</p>}
