@@ -36,7 +36,7 @@ const Page = async ({ params }) => {
         shipStatus={latestShipStatus}
       />
       <div className='mx-auto mt-6 flex max-w-250'>
-        <Link href={`/projects/devlog/${id}`} className='flex ml-20 text-[rgb(245,216,198)] max-w-55 border-4 bg-[rgb(78,44,51)] border-[hsl(22.59,34.14%,51.18%)] justify-center items-center py-5 px-8 text-xl rounded-2xl h-13 gap-2 w-full'>
+        <Link href={`/projects/devlog/${id}`} className='flex ml-10 text-[rgb(245,216,198)] max-w-55 border-4 bg-[rgb(78,44,51)] border-[hsl(22.59,34.14%,51.18%)] justify-center items-center py-5 px-8 text-xl rounded-2xl h-13 gap-2 w-full'>
           <FaBook /> Add Devlog
         </Link>
       </div>

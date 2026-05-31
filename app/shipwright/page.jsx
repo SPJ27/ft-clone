@@ -165,12 +165,12 @@ const Page = () => {
 
           <div className='flex-1 min-w-0 flex flex-col gap-4'>
             {!selected ? (
-              <div className='bg-[#7b4942] border-4 border-[hsl(22,34%,51%)] rounded-3xl p-10 text-center text-[rgb(155,120,100)] text-[14px]'>
+              <div className='bg-[#7b4942] border-4 border-[hsl(22,34%,51%)] rounded-lg p-10 text-center text-[rgb(155,120,100)] text-[14px]'>
                 All ships reviewed — great work!
               </div>
             ) : (
               <>
-                <div className='bg-[#7b4942] border-4 border-[hsl(22,34%,51%)] rounded-xl overflow-hidden'>
+                <div className='bg-[#7b4942] border-4 border-[hsl(22,34%,51%)] rounded-lg overflow-hidden'>
 
                   {selected.image && (
                     <div className='relative w-full h-48 sm:h-60 bg-[hsl(22,34%,35%)]'>

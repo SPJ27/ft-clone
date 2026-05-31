@@ -14,14 +14,14 @@ import {
 } from "react-icons/fa";
 
 const navItems = [
-  { icon: <FaUtensils />, label: "Kitchen", to: "/" },
+  { icon: <FaUtensils />, label: "Kitchen", to: "/kitchen" },
   { icon: <FaCompass />, label: "Explore", to: "/explore" },
   { icon: <CgExtension />, label: "Projects", to: "/projects" },
   { icon: <FaQuestionCircle />, label: "About", to: "/about" },
   { icon: <FaStar />, label: "Vote", to: "/vote" },
   { icon: <FaShoppingCart />, label: "Shop", to: "/shop" },
   { icon: <FaShip />, label: "Shipwright", to: "/shipwright" },
-  { icon: <FaStarHalfAlt />, label: "Admin", to: "/admin" },
+  // { icon: <FaStarHalfAlt />, label: "Admin", to: "/admin" }, commenting out for now since it wont be implemented as its a public application
 ];
 
 const Sidebar = () => {
@@ -42,7 +42,7 @@ const Sidebar = () => {
   return (
     <>
       <div className="hidden md:block fixed left-12 top-1/2 -translate-y-1/2 z-50 group">
-        <div className="w-30 group-hover:w-64 transition-[width] duration-300 ease-in-out bg-[#6199c2] text-[rgb(249,229,197)] flex flex-col rounded-2xl overflow-hidden h-150">
+        <div className="w-30 group-hover:w-64 transition-[width] duration-300 ease-in-out bg-[#6199c2] text-[rgb(249,229,197)] flex flex-col rounded-2xl overflow-hidden h-138">
           <div className="flex flex-col flex-1 py-6">
             {navItems.map(({ icon, label, to }) => {
               const active =

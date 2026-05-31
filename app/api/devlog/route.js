@@ -6,7 +6,7 @@ import { getUser } from "../projects/route";
 async function getHours(session_id, project_id, cookies) {
   const supabase = createClient(cookies);
 
-  const currentUser = await getUser()
+  const currentUser = await getUser();
 
   let hours = 0;
 
@@ -15,9 +15,15 @@ async function getHours(session_id, project_id, cookies) {
     .select("hackatime_projects, user_name, total_hours")
     .eq("id", project_id)
     .single();
-  console.log(currentUser)
-  if (projectError || !projectRes) {console.log('1'); return -1};
-  if (projectRes.user_name !== currentUser.name) {console.log('2'); return -1}
+  console.log(currentUser);
+  if (projectError || !projectRes) {
+    console.log("1");
+    return -1;
+  }
+  if (projectRes.user_name !== currentUser.name) {
+    console.log("2");
+    return -1;
+  }
 
   try {
     for (const project of projectRes.hackatime_projects) {
@@ -26,7 +32,7 @@ async function getHours(session_id, project_id, cookies) {
         {
           method: "GET",
           headers: { Authorization: `Bearer ${currentUser.auth_token}` },
-        }
+        },
       );
 
       if (!res.ok) return -1;
@@ -47,11 +53,16 @@ export async function GET(request) {
 
   const cookieStore = await cookies();
   const session_id = cookieStore.get("session_id")?.value;
-  if (!session_id) return NextResponse.json({ error: "unauthenticated" }, { status: 401 });
+  if (!session_id)
+    return NextResponse.json({ error: "unauthenticated" }, { status: 401 });
 
   const hours = await getHours(session_id, project_id, cookieStore);
-  console.log('hours', hours)
-  if (hours === -1) return NextResponse.json({ error: "failed to fetch hours" }, { status: 400 });
+  console.log("hours", hours);
+  if (hours === -1)
+    return NextResponse.json(
+      { error: "failed to fetch hours" },
+      { status: 400 },
+    );
 
   return NextResponse.json({ hours });
 }
@@ -59,7 +70,8 @@ export async function GET(request) {
 export async function POST(request) {
   const cookieStore = await cookies();
   const session_id = cookieStore.get("session_id")?.value;
-  if (!session_id) return NextResponse.json({ error: "unauthenticated" }, { status: 401 });
+  if (!session_id)
+    return NextResponse.json({ error: "unauthenticated" }, { status: 401 });
 
   const supabase = createClient(cookieStore);
 
@@ -83,24 +95,28 @@ export async function POST(request) {
 
       const cdnData = await cdnRes.json();
       return cdnData.url;
-    })
+    }),
   );
 
   const devlog_images = uploaded_urls.filter(Boolean);
 
   const hours = await getHours(session_id, project_id, cookieStore);
-  if (hours === -1) return NextResponse.json({ error: "failed to fetch hours" }, { status: 400 });
+  if (hours === -1)
+    return NextResponse.json(
+      { error: "failed to fetch hours" },
+      { status: 400 },
+    );
 
   const { data: project, error: fetchError } = await supabase
     .from("projects")
-    .select("devlogs, total_hours, unpaid_hours")
+    .select('*')
     .eq("id", project_id)
     .single();
-
+  console.log("project", project);
   if (fetchError || !project) {
     return NextResponse.json({ error: "project not found" }, { status: 404 });
   }
-
+  const devlogHours = hours;
   const total_hours = project.total_hours + hours;
   const unpaid_hours = project.unpaid_hours + hours;
 
@@ -114,14 +130,28 @@ export async function POST(request) {
 
   const updatedDevlogs = [...existingDevlogs, newEntry];
 
-  const { error: updateError } = await supabase
+  const { data: projectData, error: updateError } = await supabase
     .from("projects")
     .update({ devlogs: updatedDevlogs, total_hours, unpaid_hours })
     .eq("id", project_id);
 
+  const { data, error: updateError2 } = await supabase
+    .from("users")
+    .select()
+    .eq("hackclub_id", project.user_id)
+    .single();
+  console.log("data", data);
+  const newHours = (data.hours || 0) + devlogHours;
+  console.log("newHours", newHours);
+  console.log("devlogHours", devlogHours);
+  const { error: updateError3 } = await supabase
+    .from("users")
+    .update({ hours: newHours })
+    .eq("hackclub_id", project.user_id);
+  console.log("updateError3", updateError3);
   if (updateError) {
     return NextResponse.json({ error: updateError.message }, { status: 500 });
   }
 
-  return NextResponse.json({ success: true, hours });
+  return NextResponse.json({ success: true, devlogHours });
 }

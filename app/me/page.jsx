@@ -64,13 +64,17 @@ const page = async () => {
             Name: {user.name}
             <br />
             Email: {user.email}
+            <br />
+            Joined On: {new Date(user.created_at).toLocaleDateString()}
           </div>
           <div className="mb-5 text-xl mx-auto max-w-md text-[#7b4942] bg-[#d7b593] px-7 py-5 rounded-2xl font-medium border-[hsl(22.59,34.14%,51.18%)] border-[0.5px]">
             Cookies: 🍪{user.cookies}
             <br />
             Vote Balance: {user.balance}
             <br />
-            Joined On: {new Date(user.created_at).toLocaleDateString()}
+            Total Hours: {user.hours.toFixed(2)}h
+            <br/>
+            
           </div>
         </div>
         <div className="flex flex-col gap-6 mt-6 lg:mt-0">

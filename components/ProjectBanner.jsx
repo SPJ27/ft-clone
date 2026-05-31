@@ -49,7 +49,7 @@ const ProjectBanner = ({ id, image, title, desc, repo, demo, hours, user, devlog
         <Link href={demo} className='flex text-[rgb(245,216,198)] bg-[rgb(78,44,51)] justify-center items-center py-4 sm:py-5 px-8 text-lg sm:text-xl rounded-lg h-12 sm:h-10 gap-2 w-full'><FaGlobe /> Demo</Link>
         <Link href={repo} className='flex text-[rgb(245,216,198)] bg-[rgb(78,44,51)] justify-center items-center py-4 sm:py-5 px-8 text-lg sm:text-xl rounded-lg h-12 sm:h-10 gap-2 w-full'><FaGithub /> Repository</Link>
         {showShipButton && (
-          <Link href={`/projects/ship/${id}`} className={`flex ${canShip ? 'text-[rgb(245,216,198)] bg-[rgb(78,44,51)]' : 'pointer-events-none text-[rgb(187,157,140)] bg-[rgb(133,94,101)]'} justify-center items-center py-4 sm:py-5 px-8 text-lg sm:text-xl rounded-lg h-12 sm:h-13 gap-2 w-full`}><FaRocket /> Ship</Link>
+          <Link href={`/projects/ship/${id}`} className={`flex ${canShip ? 'text-[rgb(245,216,198)] bg-[rgb(78,44,51)]' : 'pointer-events-none cursor-not-allowed text-[rgb(187,157,140)] bg-[rgb(133,94,101)]'} justify-center items-center py-4 sm:py-5 px-8 text-lg sm:text-xl rounded-lg h-12 sm:h-10 gap-2 w-full`}><FaRocket /> Ship</Link>
         )}
       </div>
     </div>

@@ -58,7 +58,7 @@ const Page = () => {
             if (!res.ok) {
                 setError(data.error || 'Something went wrong')
             } else {
-                setSuccess(`Devlog added! Hours logged: ${(data.hours / 3600).toFixed(2)}h`)
+                setSuccess(`Devlog added! Hours logged: ${(data.devlogHours / 3600).toFixed(2)}h`)
                 redirect(`/projects/${project_id}`)
             }
         }

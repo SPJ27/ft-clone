@@ -34,7 +34,7 @@ const Page = () => {
         'Login with Hack Club'
       :
       'Go to the dashboard'}
-      </button>
+        </button>
     </div>
   )
 }

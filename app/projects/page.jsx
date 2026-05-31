@@ -66,6 +66,14 @@ const Page = async () => {
             {userProjects.map((project, i) => (
               <ProjectBanner key={project.id ?? i} {...project} />
             ))}
+            <div className='col-span-full flex justify-center mt-4'>
+              <Link
+                href='/projects/new'
+                className='flex text-[rgb(245,216,198)] bg-[rgb(78,44,51)] justify-center items-center py-4 sm:py-5 px-8 text-lg sm:text-xl rounded-lg h-12 sm:h-10 gap-2 w-full max-w-xs'
+              >
+                + New Project
+              </Link>
+            </div>
           </div>
         ) : (
           <div className='text-center text-[rgb(249,229,197)] opacity-60 mt-24 text-lg'>
