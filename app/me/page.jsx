@@ -50,7 +50,7 @@ const page = async () => {
     headers: { Cookie: (await cookies()).toString() },
   });
   const { user, userProjects } = await res.json();
-
+  console.log(user)
   return (
     <div className="mx-auto max-w-7xl px-5 mt-15">
       <div className="mb-5 text-center text-3xl mx-auto max-w-md bg-[#7b4942] px-7 py-5 rounded-2xl font-extrabold border-[hsl(22.59,34.14%,51.18%)] border-10 text-[rgb(249,229,197)]">
