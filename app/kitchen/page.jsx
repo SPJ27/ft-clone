@@ -13,6 +13,8 @@ const page = async () => {
     .select()
     .order("hours", { ascending: false })
     .limit(20);
+  console.log(users)
+  console.log(usersHours)
   return (
     <div className="px-4 w-full mx-auto max-w-3xl">
       <div className="bg-[hsl(214,39%,39%)] tracking-wide text-center max-w-xs mx-auto text-white text-2xl font-bold px-13 py-2.5 rounded-2xl mt-10">

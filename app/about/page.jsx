@@ -2,8 +2,8 @@ import React from 'react'
 
 const Page = () => {
   return (
-    <div className='flex justify-center mt-15 w-full'>
-        <div className='max-w-2xl text-bold text-2xl '>
+    <div className='px-5 flex justify-center mt-15 w-full'>
+        <div className='max-w-2xl text-bold text-md md:text-2xl '>
         Hi, this is @spj. <br/> <br/>
         This is an attempt to make a flavortown clone, but for Macondo. It has almost all of the features of Flavortown. The tech stack used in this website is next.js for backend and api, tailwind css, supabase for database and hackatime for authentication.
         <br/>

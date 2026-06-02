@@ -15,7 +15,7 @@ const ProjectBanner = ({ id, banner_url: image, project_name: title, project_des
           <Image
             src={image}
             alt='project image'
-            width={308}
+            width={300}
             height={100}
             className='object-cover mx-auto object-top'
           />
@@ -25,13 +25,13 @@ const ProjectBanner = ({ id, banner_url: image, project_name: title, project_des
         <div className='md:text-[1.8rem] text-[1.4rem] leading-tight flex-1 font-semibold text-[rgb(249,229,197)]'>
           {title}
         </div>
-        <span className='text-md font-bold text-[rgb(199,179,158)]'>By: {user}</span>
+        <span className='text-xs md:text-md font-bold text-[rgb(199,179,158)]'>By: {user}</span>
       </div>
-      <div className='flex px-3 md:text-[19px] text-[15px] mt-3 font-semibold text-[rgb(215,181,147)] gap-10'>
+      <div className='flex px-3 md:text-[19px] text-[12px] mt-1 md:mt-3 font-semibold text-[rgb(215,181,147)] gap-10'>
         <span className='flex gap-1 items-center'><FaClock /> Hours: {hours}h {minutes}m</span>
         <span className='flex gap-1 items-center'><FaFileAlt /> Devlogs: {devlogs.length}</span>
       </div>
-      <div className='px-3 md:text-[1.3rem] text-[1.15rem] mt-3 leading-tight flex-1 font-semibold text-[rgb(249,229,197)]'>
+      <div className='px-3 md:text-[1.3rem] text-[0.875rem] md:mt-3 mt-1 leading-tight flex-1 font-semibold text-[rgb(249,229,197)]'>
         {project_desc.substring(0, 100).trimEnd()}...
       </div>
     </Link>
@@ -53,10 +53,10 @@ const page = async () => {
   return (
     <div className='flex w-full mx-auto items-center justify-center'>
       <div className='w-full max-w-4xl md:ml-24 items-center'>
-        <div className='bg-[hsl(214,39%,39%)] text-center max-w-60 md:max-w-md mx-auto text-white text-md md:text-4xl font-bold px-15 py-3 rounded-2xl mt-10'>
+        <div className='bg-[hsl(214,39%,39%)] text-center max-w-73 md:max-w-md mx-auto text-white text-lg md:text-4xl font-bold px-15 py-3 rounded-2xl mt-10'>
           Random Projects
         </div>
-        <div className='w-full gap-x-16 gap-y-14 mt-13 grid px-4 grid-cols-1 md:grid-cols-2'>
+        <div className='w-full gap-x-16 gap-y-14 mt-8 grid px-4 grid-cols-1 md:grid-cols-2'>
           {projects.map((project, i) => (
             <ProjectBanner key={i} {...project} />
           ))}

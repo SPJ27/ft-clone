@@ -1,6 +1,8 @@
 import { createClient } from "@/supabase/server"
 import { cookies } from "next/headers"
 import {randomUUID} from "crypto"
+import {redirect} from 'next/navigation'
+import { NextResponse } from "next/server"
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url)
@@ -91,10 +93,6 @@ export async function GET(request) {
       maxAge: tokenData.expires_in ?? 60 * 60 * 24 * 7,
     })
 
-    return Response.json({
-      success: true,
-      user: userData  
-    })
   } catch (error) {
     console.error("Callback error:", error)
     return Response.json(
@@ -104,4 +102,5 @@ export async function GET(request) {
       { status: 500 }
     )
   }
+  return NextResponse.redirect(new URL("/kitchen", request.url)) 
 }

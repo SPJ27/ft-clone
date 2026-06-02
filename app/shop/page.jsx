@@ -20,15 +20,15 @@ const Page = () => {
     },
   ];
   return (
-    <div className="px-20 w-full max-w-6xl mx-auto">
+    <div className="px-20 w-full max-w-4xl mx-auto">
       <div className="bg-[hsl(214,39%,39%)] tracking-wide text-center max-w-xs mx-auto text-white text-3xl font-bold px-13 py-2.5 rounded-2xl mt-10   ">
         Shop
       </div>
-      <div className="grid grid-cols-2 px-20">
+      <div className="grid grid-cols-1 md:grid-cols-2 mx-auto w-full">
         {shopItems.map((item) => (
           <div
             key={item.id}
-            className="border-[0.5px] border-[hsl(22.59,34.14%,51.18%)] w-100 rounded-2xl mt-10  bg-[#f8e9d3] max-w-2xl mx-auto"
+            className="max-w-xs border-[0.5px] border-[hsl(22.59,34.14%,51.18%)] w-full rounded-2xl mt-10  bg-[#f8e9d3] mx-auto"
           >
             <div className="w-full py-3.5 bg-[#e8cfb4] rounded-2xl">
             <Image

@@ -1,4 +1,4 @@
-import { Geist, Jua } from "next/font/google";
+import { Jua } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/components/Sidebar";
 
@@ -9,10 +9,11 @@ const jua = Jua({
 })
 export const metadata = {
   title: "Flavortown!",
-  description: "Not a YSWS",
+  description: "Not a YSWS, It is just a clone of Flavortown for Macondo. Made by @spj... thanks :)",
 };
 
 export default function RootLayout({ children }) {
+  
   return (
     <html lang="en" className={`h-full ${jua.className} antialiased`}>
       <body className="h-full" style={{
@@ -25,7 +26,7 @@ export default function RootLayout({ children }) {
         <div className="flex h-screen">
           <Sidebar />
 
-          <main className="flex-1 overflow-y-auto">
+          <main className="pb-30 flex-1 overflow-y-auto">
             {children}
           </main>
         </div>

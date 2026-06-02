@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { CgExtension } from "react-icons/cg";
 import {
@@ -9,8 +9,8 @@ import {
   FaShoppingCart,
   FaStar,
   FaUtensils,
-  FaStarHalfAlt,
   FaShip,
+  FaSignOutAlt,
 } from "react-icons/fa";
 
 const navItems = [
@@ -21,23 +21,26 @@ const navItems = [
   { icon: <FaStar />, label: "Vote", to: "/vote" },
   { icon: <FaShoppingCart />, label: "Shop", to: "/shop" },
   { icon: <FaShip />, label: "Shipwright", to: "/shipwright" },
-  // { icon: <FaStarHalfAlt />, label: "Admin", to: "/admin" }, commenting out for now since it wont be implemented as its a public application
 ];
 
 const Sidebar = () => {
   const pathname = usePathname();
+  const router = useRouter();
   const [user, setUser] = useState(null);
-
+  if (pathname === "/") return null;
   useEffect(() => {
     const func = async () => {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user`,
-      );
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user`);
       const { user: userRes } = await res.json();
       setUser(userRes);
     };
     func();
   }, []);
+
+  const handleLogout = async () => {
+    await fetch("/api/logout", { method: "POST" });
+    router.push("/");
+  };
 
   return (
     <>
@@ -45,17 +48,14 @@ const Sidebar = () => {
         <div className="w-30 group-hover:w-64 transition-[width] duration-300 ease-in-out bg-[#6199c2] text-[rgb(249,229,197)] flex flex-col rounded-2xl overflow-hidden h-138">
           <div className="flex flex-col flex-1 py-6">
             {navItems.map(({ icon, label, to }) => {
-              const active =
-                to === "/" ? pathname === "/" : pathname.startsWith(to);
+              const active = to === "/" ? pathname === "/" : pathname.startsWith(to);
               return (
                 <Link
                   href={to}
                   key={label}
                   className={`flex items-center py-4 text-center cursor-pointer whitespace-nowrap transition-colors duration-150 ${active ? "bg-[hsl(214,39%,42%)]" : "hover:bg-[hsl(214,39%,39%)]"}`}
                 >
-                  <span className="text-[30px] w-30 shrink-0 flex justify-center">
-                    {icon}
-                  </span>
+                  <span className="text-[30px] w-30 shrink-0 flex justify-center">{icon}</span>
                   <span className="text-[18px] font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200 delay-100 overflow-hidden">
                     {label}
                   </span>
@@ -63,28 +63,33 @@ const Sidebar = () => {
               );
             })}
           </div>
-
-          <Link href='/me' className="relative bg-[rgb(190,75,83)] hover:bg-[rgb(170,60,68)] transition-colors rounded-b-2xl h-16 shrink-0 cursor-pointer flex items-center">
-            <div className="w-30 shrink-0 flex justify-center">
-              <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-xl" />
-            </div>
-            {user && (
-              <div className="absolute left-24 opacity-0 group-hover:opacity-100 transition-opacity duration-200 delay-100">
-                <p className="text-[20px] mt-1.5 font-medium leading-none">
-                  {user.name}
-                </p>
-                <p className="text-md opacity-70">🍪 {user.cookies}</p>
+          <div className="relative bg-[rgb(190,75,83)] rounded-b-2xl h-16 shrink-0 flex items-center">
+            <Link href="/me" className="flex items-center flex-1 hover:bg-[rgb(170,60,68)] transition-colors h-full rounded-b-2xl">
+              <div className="w-30 shrink-0 flex justify-center">
+                <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-xl" />
               </div>
-            )}
-          </Link>
+              {user && (
+                <div className="absolute left-24 opacity-0 group-hover:opacity-100 transition-opacity duration-200 delay-100">
+                  <p className="text-[20px] mt-1.5 font-medium leading-none">{user.name}</p>
+                  <p className="text-md opacity-70">🍪 {user.cookies}</p>
+                </div>
+              )}
+            </Link>
+            <button
+              onClick={handleLogout}
+              title="Logout"
+              className="absolute right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 delay-100 hover:text-white/70 text-white"
+            >
+              <FaSignOutAlt size={18} />
+            </button>
+          </div>
         </div>
       </div>
 
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#6199c2] text-[rgb(249,229,197)]">
         <div className="flex flex-row items-center justify-between px-2">
           {navItems.map(({ icon, label, to }) => {
-            const active =
-              to === "/" ? pathname === "/" : pathname.startsWith(to);
+            const active = to === "/" ? pathname === "/" : pathname.startsWith(to);
             return (
               <Link
                 href={to}
@@ -100,28 +105,23 @@ const Sidebar = () => {
             );
           })}
 
-          <div className="flex items-center justify-center py-3 flex-shrink-0">
-            <Link
-              href="/me"
-              className="w-10 h-10 rounded-full bg-[rgb(190,75,83)] hover:bg-[rgb(170,60,68)] transition-colors flex items-center justify-center"
-            >
-              <span />
-            </Link>
-          </div>
         </div>
-        <div>
-          {user && (
-            <Link
-              href="/me"
-              className="flex flex-col items-center justify-center py-1"
-            >
-              <p className="text-[20px] font-medium leading-none">
-                {user.name}
-              </p>
+
+        {user && (
+          <div className="flex items-center justify-center gap-3 py-1">
+            <Link href="/me" className="flex flex-col items-center">
+              <p className="text-[20px] font-medium leading-none">{user.name}</p>
               <p className="text-md opacity-70">🍪 {user.cookies}</p>
             </Link>
-          )}
-        </div>
+            <button
+              onClick={handleLogout}
+              title="Logout"
+              className="text-white/80 hover:text-white transition-colors"
+            >
+              <FaSignOutAlt size={16} />
+            </button>
+          </div>
+        )}
       </div>
     </>
   );

@@ -127,7 +127,7 @@ const Page = () => {
   }
   return (
     <div className='min-h-screen bg-[rgb(249,229,197)] p-4 sm:p-6'>
-      <div className='max-w-225 mx-auto'>
+      <div className='max-w-200 mx-auto'>
 
         <div className='mb-5 flex items-center gap-3'>
           <FaShip className='text-[#7b4942] text-2xl' />
@@ -137,9 +137,9 @@ const Page = () => {
           </div>
         </div>
 
-        <div className='flex gap-4 items-start'>
+        <div className='grid grid-cols-1 gap-y-5 md:grid-cols-7 items-start'>
 
-          <div className='w-64 shrink-0 bg-[#7b4942] border-4 border-[hsl(22,34%,51%)] rounded-lg overflow-hidden'>
+          <div className='col-span-3 max-w-xs shrink-0 bg-[#7b4942] border-4 border-[hsl(22,34%,51%)] rounded-lg overflow-hidden'>
             <div className='px-4 py-3 border-b border-[hsl(22,34%,45%)]'>
               <div className='text-[14px] font-medium text-[rgb(249,229,197)] flex items-center gap-2'>
                 <FaShip /> Pending ships
@@ -163,7 +163,7 @@ const Page = () => {
             </div>
           </div>
 
-          <div className='flex-1 min-w-0 flex flex-col gap-4'>
+          <div className='flex-1 col-span-4 flex flex-col gap-4'>
             {!selected ? (
               <div className='bg-[#7b4942] border-4 border-[hsl(22,34%,51%)] rounded-lg p-10 text-center text-[rgb(155,120,100)] text-[14px]'>
                 All ships reviewed — great work!
