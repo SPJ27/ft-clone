@@ -27,7 +27,7 @@ const ProjectBanner = ({ id, banner_url: image, project_name: title, project_des
         </div>
         <span className='text-xs md:text-md font-bold text-[rgb(199,179,158)]'>By: {user}</span>
       </div>
-      <div className='flex px-3 md:text-[19px] text-[12px] mt-1 md:mt-3 font-semibold text-[rgb(215,181,147)] gap-10'>
+      <div className='flex px-3 md:text-[15px] text-[12px] mt-1 font-semibold text-[rgb(215,181,147)] gap-10'>
         <span className='flex gap-1 items-center'><FaClock /> Hours: {hours}h {minutes}m</span>
         <span className='flex gap-1 items-center'><FaFileAlt /> Devlogs: {devlogs.length}</span>
       </div>
@@ -52,8 +52,8 @@ const page = async () => {
 
   return (
     <div className='flex w-full mx-auto items-center justify-center'>
-      <div className='w-full max-w-4xl md:ml-24 items-center'>
-        <div className='bg-[hsl(214,39%,39%)] text-center max-w-73 md:max-w-md mx-auto text-white text-lg md:text-4xl font-bold px-15 py-3 rounded-2xl mt-10'>
+      <div className='w-full max-w-220 md:ml-24 items-center'>
+        <div className='bg-[hsl(214,39%,39%)] text-center max-w-73 md:max-w-sm mx-auto text-white text-lg md:text-2xl font-bold px-15 py-3 rounded-2xl mt-10'>
           Random Projects
         </div>
         <div className='w-full gap-x-16 gap-y-14 mt-8 grid px-4 grid-cols-1 md:grid-cols-2'>

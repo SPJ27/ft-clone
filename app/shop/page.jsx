@@ -15,7 +15,7 @@ const Page = () => {
       id: 2,
       name: "iPad Air",
       desc: "Like an iphone but bigger and pencil support.",
-      banner: 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTexDKRBGcDApaLVB00BOc6DxrZ_9nB8vh-YzhsRz-a57exqGGpQfsCruncVpPyY1UGWFdKSmR4DdezrLfIQ9YJHM1sYRMYluJ5BuXrbHlyo_ZdpImHUtuHkQ',
+      banner: 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTeyexPdgjSRgjkNh79rcnCbPPTDnDrs7n3N9PXncWp7VA1u40WpK5K5cqNZYPZehgV2dYOf9vyT7aENOvlL4afz_Ae358coKDVLG248J9wgRgU2HYqZgCxz5lfEFIHLVg69KKrC-I&usqp=CAc',
       cookies: 2500,
     },
   ];
@@ -36,7 +36,7 @@ const Page = () => {
               alt={item.name}
               width={200}
               height={200}
-              className="h-auto w-91 m-auto rounded-2xl object-cover "
+              className="w-auto h-45 m-auto rounded-2xl object-cover "
             />
             </div>
             <div className="px-5 py-3">

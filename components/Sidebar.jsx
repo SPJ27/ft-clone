@@ -64,17 +64,17 @@ const Sidebar = () => {
             })}
           </div>
           <div className="relative bg-[rgb(190,75,83)] rounded-b-2xl h-16 shrink-0 flex items-center">
-            <Link href="/me" className="flex items-center flex-1 hover:bg-[rgb(170,60,68)] transition-colors h-full rounded-b-2xl">
+            <div className="flex items-center flex-1 hover:bg-[rgb(170,60,68)] transition-colors h-full rounded-b-2xl">
               <div className="w-30 shrink-0 flex justify-center">
                 <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-xl" />
               </div>
               {user && (
-                <div className="absolute left-24 opacity-0 group-hover:opacity-100 transition-opacity duration-200 delay-100">
+                <Link href="/me" className="absolute left-24 opacity-0 group-hover:opacity-100 transition-opacity duration-200 delay-100">
                   <p className="text-[20px] mt-1.5 font-medium leading-none">{user.name}</p>
                   <p className="text-md opacity-70">🍪 {user.cookies}</p>
-                </div>
+                </Link>
               )}
-            </Link>
+            </div>
             <button
               onClick={handleLogout}
               title="Logout"
