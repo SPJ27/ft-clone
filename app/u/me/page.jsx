@@ -52,13 +52,13 @@ const page = async () => {
   const { user, userProjects } = await res.json();
   console.log(user)
   return (
-    <div className="mx-auto max-w-7xl px-5 mt-15">
-      <div className="mb-5 text-center text-3xl mx-auto max-w-md bg-[#7b4942] px-7 py-5 rounded-2xl font-extrabold border-[hsl(22.59,34.14%,51.18%)] border-10 text-[rgb(249,229,197)]">
-        Flavortown User Profile
+    <div className="mx-auto max-w-6xl gap-5 px-5 mt-15">
+      <div className="mb-4 bg-[hsl(214,39%,39%)] tracking-wide text-center max-w-xs mx-auto text-white text-2xl font-bold px-13 py-2.5 rounded-2xl mt-10">
+        User Profile
       </div>
       <div className="grid grid-cols-1 lg:px-30 lg:grid-cols-2">
         <div>
-          <div className="mb-5 text-xl mx-auto max-w-md text-[#7b4942] bg-[#d7b593] px-7 py-5 rounded-2xl font-medium border-[hsl(22.59,34.14%,51.18%)] border-[0.5px]">
+          <div className="mb-5 text-lg mx-auto max-w-sm text-[#7b4942] bg-[#d7b593] px-7 py-5 rounded-2xl font-medium border-[hsl(22.59,34.14%,51.18%)] border-[0.5px]">
             ID: {user.id}
             <br />
             Name: {user.name}
@@ -67,7 +67,7 @@ const page = async () => {
             <br />
             Joined On: {new Date(user.created_at).toLocaleDateString()}
           </div>
-          <div className="mb-5 text-xl mx-auto max-w-md text-[#7b4942] bg-[#d7b593] px-7 py-5 rounded-2xl font-medium border-[hsl(22.59,34.14%,51.18%)] border-[0.5px]">
+          <div className="mb-5 text-lg mx-auto max-w-sm text-[#7b4942] bg-[#d7b593] px-7 py-5 rounded-2xl font-medium border-[hsl(22.59,34.14%,51.18%)] border-[0.5px]">
             Cookies: 🍪{user.cookies}
             <br />
             Vote Balance: {user.balance}

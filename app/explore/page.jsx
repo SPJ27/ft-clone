@@ -6,11 +6,14 @@ import Link from 'next/link'
 import React from 'react'
 import { FaClock, FaFileAlt } from 'react-icons/fa'
 
-const ProjectBanner = ({ id, banner_url: image, project_name: title, project_desc, user_name: user, total_hours, devlogs }) => {
+const ProjectBanner = async ({ id, banner_url: image, project_name: title, project_desc, user_name: user, user_id , total_hours, devlogs }) => {
   const [hours, minutes] = hoursConverter(total_hours)
+  const supabase = createClient(await cookies())
+  const { data: creator } = await supabase.from('users').select().eq('hackclub_id', user_id).single()
+  console.log('creator', creator)
   return (
-    <Link href={`/projects/${id}`} className='text-white w-full border-14 mx-auto border-[hsl(22.59,34.14%,51.18%)] rounded-3xl p-5 bg-[#7b4942]'>
-      <div className='relative rounded-2xl items-center flex overflow-hidden bg-[hsl(22.59,34.14%,51.18%)] h-48'>
+    <div  className='text-white w-full border-14 mx-auto border-[hsl(22.59,34.14%,51.18%)] rounded-3xl p-5 bg-[#7b4942]'>
+      <Link href={`/projects/${id}`} className='relative rounded-2xl items-center flex overflow-hidden bg-[hsl(22.59,34.14%,51.18%)] h-48'>
         {image && (
           <Image
             src={image}
@@ -20,21 +23,23 @@ const ProjectBanner = ({ id, banner_url: image, project_name: title, project_des
             className='object-cover mx-auto object-top'
           />
         )}
-      </div>
+      </Link>
       <div className='mt-6 px-3 items-center'>
-        <div className='md:text-[1.8rem] text-[1.4rem] leading-tight flex-1 font-semibold text-[rgb(249,229,197)]'>
+        <Link href={`/projects/${id}`} className='md:text-[1.8rem] block text-[1.4rem] leading-tight flex-1 font-semibold text-[rgb(249,229,197)]'>
           {title}
-        </div>
-        <span className='text-xs md:text-md font-bold text-[rgb(199,179,158)]'>By: {user}</span>
+        </Link>
+        <Link href={`/u/${creator?.id || user_id}`} className='hover:underline text-xs md:text-md font-bold text-[rgb(199,179,158)]'>
+          By: {creator?.name || user}
+        </Link>
       </div>
-      <div className='flex px-3 md:text-[15px] text-[12px] mt-1 font-semibold text-[rgb(215,181,147)] gap-10'>
+      <Link href={`/projects/${id}`} className='flex px-3 md:text-[13px] text-[12px] mt-1 font-semibold text-[rgb(215,181,147)] gap-10'>
         <span className='flex gap-1 items-center'><FaClock /> Hours: {hours}h {minutes}m</span>
         <span className='flex gap-1 items-center'><FaFileAlt /> Devlogs: {devlogs.length}</span>
-      </div>
-      <div className='px-3 md:text-[1.3rem] text-[0.875rem] md:mt-3 mt-1 leading-tight flex-1 font-semibold text-[rgb(249,229,197)]'>
-        {project_desc.substring(0, 100).trimEnd()}...
-      </div>
-    </Link>
+      </Link>
+      <Link href={`/projects/${id}`} className='px-3 md:text-[1rem] text-[0.875rem] md:mt-20 mt-3 leading-tight flex-1 font-semibold text-[rgb(249,229,197)]'>
+        {project_desc.substring(0, 70).trimEnd()}...
+      </Link>
+    </div>
   )
 }
 

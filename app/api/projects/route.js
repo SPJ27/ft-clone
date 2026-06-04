@@ -154,8 +154,9 @@ export async function GET(request) {
     .select()
     .eq('project_id', project_id)
 
+  console.log(userData, projectData)
   const isCurrentUserCreated = userData
-    ? projectData.user_id === userData.hackclub_id  
+    ? projectData.user_id === parseInt(userData.hackclub_id)
     : false
 
   const canShip =

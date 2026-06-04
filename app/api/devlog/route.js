@@ -34,7 +34,7 @@ async function getHours(session_id, project_id, cookies) {
           headers: { Authorization: `Bearer ${currentUser.auth_token}` },
         },
       );
-
+      console.log(res.ok);
       if (!res.ok) return -1;
 
       const data = await res.json();
