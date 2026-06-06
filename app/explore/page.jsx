@@ -49,23 +49,23 @@ const ProjectBanner = async ({
           />
         )}
       </Link>
-      <div className="mt-6 px-3 items-center">
+      <div className="mt-6 px-3 flex flex-col">
         <Link
           href={`/projects/${id}`}
-          className="md:text-[1.8rem] block text-[1.4rem] leading-tight flex-1 font-semibold text-[rgb(249,229,197)]"
+          className="md:text-[1.6rem] text-[1.4rem] leading-tight flex-1 text-[rgb(249,229,197)]"
         >
           {title}
         </Link>
         <Link
           href={`/u/${creator?.id || user_id}`}
-          className="hover:underline text-xs md:text-md font-bold text-[rgb(199,179,158)]"
+          className="hover:underline text-xs md:text-md mb-1 text-[rgb(199,179,158)]"
         >
           By: {creator?.name || user}
         </Link>
       </div>
       <Link
         href={`/projects/${id}`}
-        className="flex px-3 md:text-[13px] text-[12px] mt-1 font-semibold text-[rgb(215,181,147)] gap-10"
+        className="flex px-3 md:text-[13px] text-[12px] mt-1 text-[rgb(215,181,147)] gap-10"
       >
         <span className="flex gap-1 items-center">
           <FaClock /> Hours: {hours}h {minutes}m
@@ -76,7 +76,7 @@ const ProjectBanner = async ({
       </Link>
       <Link
         href={`/projects/${id}`}
-        className="px-3 md:text-[1rem] text-[0.875rem] md:mt-20 mt-3 leading-tight flex-1 font-semibold text-[rgb(249,229,197)]"
+        className="px-3 md:text-[1rem] text-[0.875rem] mt-7 leading-tight flex-1  text-[rgb(249,229,197)]"
       >
         {project_desc.substring(0, 70).trimEnd()}...
       </Link>

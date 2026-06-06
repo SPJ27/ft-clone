@@ -33,11 +33,11 @@ const ProjectBanner = ({
         )}
       </div>
 
-      <h2 className="mt-4 sm:mt-5 px-1 sm:px-2 text-[1.35rem] sm:text-[1.6rem] md:text-[1.85rem] leading-tight text-[rgb(249,229,197)] line-clamp-2">
+      <h2 className="mt-4 sm:mt-5 px-1 sm:px-2 text-[1.35rem] md:text-[1.45rem] leading-tight text-[rgb(249,229,197)] line-clamp-2">
         {title}
       </h2>
 
-      <div className="flex flex-wrap px-1 sm:px-2 text-[11px] sm:text-[13px] md:text-[14px] mt-1.5 text-[rgb(215,181,147)] gap-x-5 gap-y-1">
+      <div className="flex flex-wrap px-1 sm:px-2 text-[11px] sm:text-[12px] md:text-[13px] mt-0.5 text-[rgb(215,181,147)] gap-x-5 gap-y-1">
         <span className="flex gap-1 items-center">
           <FaClock className="shrink-0" />
           {hours}h {minutes}m
@@ -48,7 +48,7 @@ const ProjectBanner = ({
         </span>
       </div>
 
-      <p className="px-1 sm:px-2 text-[0.9rem] sm:text-[1rem] md:text-[1.08rem] mt-2.5 sm:mt-3 leading-snug font-medium text-[rgb(249,229,197)] opacity-85 line-clamp-3 flex-1">
+      <p className="px-1 sm:px-2 text-[0.9rem] sm:text-[1rem] md:text-[1.01rem] mt-1 leading-snug font-medium text-[rgb(249,229,197)] opacity-85 line-clamp-3 flex-1">
         {project_desc}
       </p>
     </Link>

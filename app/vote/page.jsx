@@ -134,7 +134,7 @@ export default function Page() {
     <div className=" min-h-screen md:ml-12">
       <div className="md:px-23 px-5 max-w-280 mx-auto">
         <Title text="Vote on a Project" />
-        <div className="flex flex-col lg:flex-row gap-6 items-start">
+        <div className="flex flex-col mt-10 lg:flex-row gap-6 items-start">
           <div className="w-full lg:w-1/2">
             <ProjectBanner
               id={project.id}
@@ -168,7 +168,7 @@ export default function Page() {
                 className="text-white border-4 sm:border-14 border-[hsl(22.59,34.14%,51.18%)] rounded-2xl p-5 sm:p-8 bg-[#7b4942]"
                 
               >
-                <h2 className="text-2xl font-bold text-[rgb(249,229,197)] mb-1">
+                  <h2 className="text-2xl text-[rgb(249,229,197)] mb-0.5">
                   Scorecard
                 </h2>
                 <p className="text-[rgb(215,181,147)] text-sm mb-6">
@@ -179,7 +179,7 @@ export default function Page() {
                     <div key={key}>
                       <div className="gap-4 items-center justify-between mb-1">
                         <div className="mb-2">
-                          <div className="text-xl font-semibold text-[rgb(249,229,197)]">
+                          <div className="text-md text-[rgb(249,229,197)]">
                             {label}
                           </div>
                           <div className="text-[rgb(215,181,147)] text-sm">
@@ -195,7 +195,7 @@ export default function Page() {
                             }
                             color={color}
                           />
-                          <div className="md:text-2xl text-xl flex  text-[rgb(215,181,147)] ml-4 self-end">
+                          <div className="text-xl flex text-[rgb(215,181,147)] ml-4 self-end">
                             {scores[key]}/9
                           </div>
                         </div>
@@ -204,7 +204,7 @@ export default function Page() {
                   ))}
                 </div>
                 <div className="mt-6">
-                  <label className="text-[rgb(249,229,197)] text-sm font-semibold block mb-2">
+                  <label className="text-[rgb(249,229,197)] text-sm block mb-2">
                     Feedback{" "}
                     <span className="text-[rgb(215,181,147)] font-normal">
                       (optional)

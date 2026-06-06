@@ -3,7 +3,7 @@ import React from "react";
 const Page = () => {
   return (
     <div className="px-5 flex justify-center mt-15 w-full">
-      <div className="max-w-2xl text-semibold text-md md:text-2xl ">
+      <div className="max-w-2xl font-extralight text-md md:text-2xl ">
         Hi, this is @spj. <br /> <br />
         This is an attempt to make a flavortown clone, but for Macondo. It has
         almost all of the features of Flavortown. The tech stack used in this

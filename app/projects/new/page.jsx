@@ -100,7 +100,7 @@ const Page = () => {
 
   return (
     <div className="p-8 max-w-2xl mx-auto w-full">
-      <div className="bg-[hsl(214,39%,39%)] tracking-wide text-center max-w-xs mx-auto text-white text-2xl font-bold px-13 py-2.5 rounded-2xl mt-10">
+      <div className="bg-[hsl(214,39%,39%)] tracking-wide text-center max-w-xs mx-auto text-white text-2xl px-13 py-2.5 rounded-2xl mt-10">
         New Project
       </div>
 
@@ -116,7 +116,7 @@ const Page = () => {
         ].map(
           ([label, value, setter, type, required]) => (
             <div key={label}>
-              <label className="block mb-1 font-semibold">{label}{required && <span className="text-red-300 ml-1">*</span>}</label>
+              <label className="block mb-1">{label}{required && <span className="text-red-300 ml-1">*</span>}</label>
               <input
                 type={type}
                 value={value}
@@ -129,7 +129,7 @@ const Page = () => {
         ))}
 
         <div>
-          <label className="block mb-1 font-semibold">
+          <label className="block mb-1">
             Banner <span className="text-red-300">*</span>
           </label>
           <input
@@ -145,7 +145,7 @@ const Page = () => {
 
         {hackatime_projects.length > 0 && (
           <div>
-            <label className="block mb-1 font-semibold">Hackatime Projects</label>
+            <label className="block mb-1">Hackatime Projects</label>
 
             <div className="relative" ref={dropdownRef}>
               <button
@@ -201,13 +201,13 @@ const Page = () => {
         )}
 
         {error && (
-          <p className="text-red-300 text-base font-semibold">{error}</p>
+          <p className="text-red-300 text-base">{error}</p>
         )}
 
         <button
           type="submit"
           disabled={submitting}
-          className="w-full py-2.5 bg-[hsl(214,39%,39%)] hover:bg-[hsl(214,39%,32%)] disabled:opacity-60 disabled:cursor-not-allowed text-white text-lg font-bold rounded-xl transition-colors cursor-pointer"
+          className="w-full py-2 bg-[hsl(214,39%,39%)] hover:bg-[hsl(214,39%,32%)] disabled:opacity-60 disabled:cursor-not-allowed text-white text-lg rounded-xl transition-colors cursor-pointer"
         >
           {submitting ? 'Creating…' : 'Create Project'}
         </button>

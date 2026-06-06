@@ -63,7 +63,7 @@ const ProjectBanner = ({
       </div>
       <div className="flex mt-4 sm:mt-6 px-2 sm:px-3 items-start gap-3">
         <div className="flex-1">
-          <div className="text-[1.5rem] sm:text-[2rem] leading-tight font-normal text-[rgb(249,229,197)]">
+          <div className="text-[1.5rem] sm:text-[2rem] leading-tight text-[rgb(249,229,197)]">
             {title}
           </div>
           <div className="text-[13px] sm:text-[14px] text-[rgb(215,181,147)]">

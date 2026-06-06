@@ -27,25 +27,25 @@ const Page = () => {
         {shopItems.map((item) => (
           <div
             key={item.id}
-            className="max-w-xs border-[0.5px] border-[hsl(22.59,34.14%,51.18%)] w-full rounded-2xl mt-10  bg-[#f8e9d3] mx-auto"
+            className="max-w-xs border-[0.5px] border-[hsl(23,48%,82%)] shadow-2xl w-full rounded-2xl mt-10  bg-[#f8e9d3] mx-auto"
           >
-            <div className="w-full py-3.5 bg-[#e8cfb4] rounded-2xl">
+            <div className="w-full py-3.5 bg-[#e8cfb4] rounded-t-2xl">
             <Image
               src={item.banner}
               alt={item.name}
               width={200}
               height={200}
-              className="w-auto h-45 m-auto rounded-2xl object-cover "
+              className="w-auto h-45 m-auto rounded-t-2xl object-cover "
             />
             </div>
             <div className="px-5 py-3">
-            <h2 className="text-2xl font-medium  text-[#5c3934]">{item.name}</h2>
-            <p className="mt-2 text-[#977873]">{item.desc.substring(0, 50)}...</p>
-            <div className="flex justify-between items-center mt-4">
-              <div className="font-medium text-[#5c3934] text-lg">🍪{item.cookies}</div>
-              <div className="font-medium text-[#5c3934] text-lg">~{Math.round(item.cookies/10)} hrs</div>
+            <h2 className="text-2xl  text-[#5c3934]">{item.name}</h2>
+            <p className="mt-0.5 text-sm text-[#977873]">{item.desc.substring(0, 50)}...</p>
+            <div className="flex font-medium text-[#5c3934] text-md justify-between items-center mt-2">
+              <div>🍪{item.cookies}</div>
+              <div>~{Math.round(item.cookies/10)} hrs</div>
             </div>
-            <button onClick={() => {alert('Hi! Unfortunately, this is a clone and you cannot purchase items.');}} className="mt-4 w-full bg-[hsl(214,39%,39%)] text-white py-2 rounded-2xl hover:bg-[hsl(214,39%,29%)] transition-colors">
+            <button onClick={() => {alert('Hi! Unfortunately, this is a clone and you cannot purchase items.');}} className="mt-4 w-full bg-[hsl(214,39%,39%)] text-white py-2 rounded-lg hover:bg-[hsl(214,39%,29%)] transition-colors">
               Buy Now
             </button>
           </div>
