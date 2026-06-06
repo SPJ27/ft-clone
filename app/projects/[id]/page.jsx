@@ -14,7 +14,6 @@ const Page = async ({ params }) => {
   })
   
   const { projectData, canShip, isCurrentUserCreated, shipEvents } = await res.json()
-  console.log(isCurrentUserCreated)
   const [hours, minutes] = hoursConverter(projectData.total_hours)
   const latestShipStatus = shipEvents?.length > 0
     ? shipEvents.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))[0].approved

@@ -1,6 +1,7 @@
 'use client'
 import React from "react";
 import Image from "next/image";
+import Title from "@/components/Title";
 
 const Page = () => {
   const shopItems = [
@@ -21,9 +22,7 @@ const Page = () => {
   ];
   return (
     <div className="px-20 w-full max-w-4xl mx-auto">
-      <div className="bg-[hsl(214,39%,39%)] tracking-wide text-center max-w-xs mx-auto text-white text-3xl font-bold px-13 py-2.5 rounded-2xl mt-10   ">
-        Shop
-      </div>
+      <Title text="Shop" />
       <div className="grid grid-cols-1 md:grid-cols-2 mx-auto w-full">
         {shopItems.map((item) => (
           <div

@@ -1,5 +1,45 @@
 import { createClient } from "@/supabase/server";
 import { cookies } from "next/headers";
+import Title from "@/components/Title";
+import { FaClock } from "react-icons/fa";
+import Link from "next/link";
+
+const Leaderboard = ({ list, type = "hours" }) => {
+  return (
+    <div
+      style={{
+        backgroundImage: `
+            linear-gradient(rgba(255,255,255,0.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.05) 75%, rgba(255,255,255,0.05)),
+            linear-gradient(90deg, rgba(255,255,255,0.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.05) 75%, rgba(255,255,255,0.05))
+            `,
+        backgroundSize: "100px 100px",
+      }}
+      className="bg-[#bc762b] border-[#e7c16e] border-8 text-white rounded-2xl p-4"
+    >
+      {list.map((user, index) => (
+        <Link
+          href={`/u/${user.id}`}
+          key={user.id}
+          className="justify-between text-md flex items-center gap-4"
+        >
+          <h1 className="hover:underline">
+            {index + 1}. {user.name}
+          </h1>
+          <h1 className="flex items-center gap-1 ">
+            {type === "hours" ? (
+              <>
+                <FaClock className="text-xs" />
+                {user.hours.toFixed(2)}
+              </>
+            ) : (
+              <>🍪 {user.cookies}</>
+            )}
+          </h1>
+        </Link>
+      ))}
+    </div>
+  );
+};
 
 const page = async () => {
   const supabase = await createClient(await cookies());
@@ -13,16 +53,21 @@ const page = async () => {
     .select()
     .order("hours", { ascending: false })
     .limit(20);
-  console.log(users)
-  console.log(usersHours)
   return (
     <div className="px-4 w-full mx-auto max-w-3xl">
-      <div className="bg-[hsl(214,39%,39%)] tracking-wide text-center max-w-xs mx-auto text-white text-2xl font-bold px-13 py-2.5 rounded-2xl mt-10">
-        Kitchen
-      </div>
+      <Title text="Kitchen" />
 
-      <div className="mt-10">
-        <div className="border-8 border-[hsl(214,39%,55%)] bg-[hsl(214,39%,39%)] text-white rounded-2xl p-6">
+      <div className="mt-10 ">
+        <div
+          style={{
+            backgroundImage: `
+            linear-gradient(rgba(255,255,255,0.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.05) 75%, rgba(255,255,255,0.05)),
+            linear-gradient(90deg, rgba(255,255,255,0.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.05) 75%, rgba(255,255,255,0.05))
+            `,
+            backgroundSize: "100px 100px",
+          }}
+          className="border-8 border-[hsl(214,39%,55%)] bg-[hsl(214,39%,39%)] text-white rounded-2xl p-6"
+        >
           <h2 className="text-2xl font-bold mb-4">Welcome to the Kitchen!</h2>
           <p className="">
             This is the home page of Flavortown Clone! Here are the basic
@@ -30,37 +75,22 @@ const page = async () => {
             page is public so that people can test it out.
           </p>
         </div>
-        <div className="bg-[#bc762b] border-[#e7c16e] border-8 mb-5 text-white rounded-2xl p-6 mt-6">
+        <div
+          style={{
+            backgroundImage: `
+            linear-gradient(rgba(255,255,255,0.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.05) 75%, rgba(255,255,255,0.05)),
+            linear-gradient(90deg, rgba(255,255,255,0.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.05) 75%, rgba(255,255,255,0.05))
+            `,
+            backgroundSize: "100px 100px",
+          }}
+          className="bg-[#bc762b] border-[#e7c16e] border-8 mb-5 text-white rounded-2xl p-6 mt-6"
+        >
           <h2 className="text-2xl font-bold mb-1">Leaderboard</h2>
           <p className="">Check out the top users and their stats!</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-[#bc762b] border-[#e7c16e] border-8 text-white rounded-2xl p-4">
-            {users.map((user, index) => (
-              <div
-                key={user.id}
-                className="justify-between text-md flex items-center gap-4"
-              >
-                <h1>
-                  {index + 1}. {user.name}
-                </h1>
-                <h1>🍪 {user.cookies}</h1>
-              </div>
-            ))}
-          </div>
-          <div className="bg-[#bc762b] border-[#e7c16e] border-8 text-white rounded-2xl p-4">
-            {usersHours.map((user, index) => (
-              <div
-                key={user.id}
-                className="justify-between text-md flex items-center gap-4"
-              >
-                <h1>
-                  {index + 1}. {user.name}
-                </h1>
-                <h1>⏰ {user.hours.toFixed(2)}</h1>
-              </div>
-            ))}
-          </div>
+          <Leaderboard list={users} type="cookies" />
+          <Leaderboard list={usersHours} type="hours" />
         </div>
       </div>
     </div>

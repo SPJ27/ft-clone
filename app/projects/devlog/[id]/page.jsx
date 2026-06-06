@@ -58,7 +58,6 @@ const Page = () => {
             if (!res.ok) {
                 setError(data.error || 'Something went wrong')
             } else {
-                setSuccess(`Devlog added! Hours logged: ${(data.devlogHours / 3600).toFixed(2)}h`)
                 redirect(`/projects/${project_id}`)
             }
         }
@@ -95,7 +94,6 @@ const Page = () => {
                     ))}
                 </div>
                 {error && <p className="text-sm text-red-500">{error}</p>}
-                {success && <p className="text-sm text-green-500">{success}</p>}
                 <button
                     type="submit"
                     disabled={loading}

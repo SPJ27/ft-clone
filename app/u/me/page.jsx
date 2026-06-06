@@ -3,6 +3,7 @@ import { hoursConverter } from "@/lib/converter";
 import Image from "next/image";
 import Link from "next/link";
 import { FaClock, FaFileAlt } from "react-icons/fa";
+import Title from "@/components/Title";
 
 const ProjectBanner = ({ id, banner_url: image, project_name: title, project_desc, total_hours, devlogs }) => {
   const [hours, minutes] = hoursConverter(total_hours)
@@ -50,13 +51,10 @@ const page = async () => {
     headers: { Cookie: (await cookies()).toString() },
   });
   const { user, userProjects } = await res.json();
-  console.log(user)
   return (
     <div className="mx-auto max-w-6xl gap-5 px-5 mt-15">
-      <div className="mb-4 bg-[hsl(214,39%,39%)] tracking-wide text-center max-w-xs mx-auto text-white text-2xl font-bold px-13 py-2.5 rounded-2xl mt-10">
-        User Profile
-      </div>
-      <div className="grid grid-cols-1 lg:px-30 lg:grid-cols-2">
+      <Title text="My Profile" />
+      <div className="grid grid-cols-1 mt-10 lg:px-30 lg:grid-cols-2">
         <div>
           <div className="mb-5 text-lg mx-auto max-w-sm text-[#7b4942] bg-[#d7b593] px-7 py-5 rounded-2xl font-medium border-[hsl(22.59,34.14%,51.18%)] border-[0.5px]">
             ID: {user.id}

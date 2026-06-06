@@ -16,6 +16,9 @@ export default function RootLayout({ children }) {
   
   return (
     <html lang="en" className={`h-full ${jua.className} antialiased`}>
+      <head>
+            <link rel="icon" type="image/x-icon" href="https://flavortown.hackclub.com/assets/favicon-5ea28202.ico" />
+      </head>
       <body className="h-full" style={{
         backgroundColor: "#e7d4b1",
         backgroundImage: `url("/bg-01.webp")`,

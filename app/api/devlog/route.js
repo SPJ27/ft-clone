@@ -15,13 +15,10 @@ async function getHours(session_id, project_id, cookies) {
     .select("hackatime_projects, user_name, total_hours")
     .eq("id", project_id)
     .single();
-  console.log(currentUser);
   if (projectError || !projectRes) {
-    console.log("1");
     return -1;
   }
   if (projectRes.user_name !== currentUser.name) {
-    console.log("2");
     return -1;
   }
 
@@ -34,7 +31,6 @@ async function getHours(session_id, project_id, cookies) {
           headers: { Authorization: `Bearer ${currentUser.auth_token}` },
         },
       );
-      console.log(res.ok);
       if (!res.ok) return -1;
 
       const data = await res.json();
@@ -57,7 +53,6 @@ export async function GET(request) {
     return NextResponse.json({ error: "unauthenticated" }, { status: 401 });
 
   const hours = await getHours(session_id, project_id, cookieStore);
-  console.log("hours", hours);
   if (hours === -1)
     return NextResponse.json(
       { error: "failed to fetch hours" },
@@ -112,7 +107,6 @@ export async function POST(request) {
     .select('*')
     .eq("id", project_id)
     .single();
-  console.log("project", project);
   if (fetchError || !project) {
     return NextResponse.json({ error: "project not found" }, { status: 404 });
   }
@@ -140,15 +134,12 @@ export async function POST(request) {
     .select()
     .eq("hackclub_id", project.user_id)
     .single();
-  console.log("data", data);
   const newHours = (data.hours || 0) + devlogHours;
-  console.log("newHours", newHours);
-  console.log("devlogHours", devlogHours);
+
   const { error: updateError3 } = await supabase
     .from("users")
     .update({ hours: newHours })
     .eq("hackclub_id", project.user_id);
-  console.log("updateError3", updateError3);
   if (updateError) {
     return NextResponse.json({ error: updateError.message }, { status: 500 });
   }

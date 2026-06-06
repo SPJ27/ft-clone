@@ -14,7 +14,6 @@ export async function GET() {
     .select("id, hours, reviewer_note, project_id")
     .eq("approved", "PENDING")
     .order("created_at", { ascending: true })
-  console.log(shipError)
   if (shipError) return NextResponse.json({ error: shipError.message }, { status: 400 })
 
     if (!shipEvents.length) return NextResponse.json({ ships: [] })
@@ -25,7 +24,6 @@ export async function GET() {
     .from("projects")
     .select("id, project_name, project_desc, project_repo, project_demo, banner_url, user_name, devlogs, unpaid_hours")
     .in("id", projectIds)
-  console.log(projectError)
   if (projectError) return NextResponse.json({ error: projectError.message }, { status: 400 })
 
   const projectMap = Object.fromEntries(projects.map(p => [p.id, p]))
@@ -87,7 +85,6 @@ export async function POST(request) {
       .from("ship_events")
       .update({ approved: "APPROVED", reviewer_note })
       .eq("id", ship_id)
-    console.log(shipUpdateError)
     if (shipUpdateError) {
       return NextResponse.json({ error: shipUpdateError.message }, { status: 400 })
     }
@@ -96,7 +93,6 @@ export async function POST(request) {
       .from("projects")
       .update({ unpaid_hours: 0 })
       .eq("id", shipData.project_id)
-    console.log(projectUpdateError)
     if (projectUpdateError) {
       return NextResponse.json({ error: projectUpdateError.message }, { status: 400 })
     }

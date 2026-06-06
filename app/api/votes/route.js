@@ -86,7 +86,6 @@ export async function POST(request) {
   if (currentUser.balance === 0) {
     return NextResponse.json({ error: "no voting balance" }, { status: 400 })
   }
-  console.log(votingData)
   const votes = votingData.votes + 1
   const votes_recieved = [
   ...(votingData.votes_recieved ?? []),

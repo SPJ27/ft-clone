@@ -47,7 +47,6 @@ export async function POST(request) {
     .single()
 
   if (error) {
-    console.error("Error inserting project:", error)
     return NextResponse.json({ error: "Failed to create project" }, { status: 500 })
   }
 
@@ -85,7 +84,6 @@ export async function PUT(request) {
     .single()
 
   if (error) {
-    console.error("Error updating project:", error)
     return NextResponse.json({ error: "Failed to update project" }, { status: 500 })
   }
 
@@ -121,7 +119,6 @@ export async function DELETE(request) {
     .eq('id', id)
 
   if (error) {
-    console.error("Error deleting project:", error)
     return NextResponse.json({ error: "Failed to delete project" }, { status: 500 })
   }
 
@@ -154,7 +151,6 @@ export async function GET(request) {
     .select()
     .eq('project_id', project_id)
 
-  console.log(userData, projectData)
   const isCurrentUserCreated = userData
     ? projectData.user_id === parseInt(userData.hackclub_id)
     : false

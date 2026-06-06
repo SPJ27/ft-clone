@@ -5,7 +5,6 @@ import { NextResponse } from "next/server";
 export async function GET(request) {
   const cookieStore = await cookies()
   const session_id = cookieStore.get("session_id")?.value
-  console.log('session_id', session_id)
   
   if (!session_id) {
     return NextResponse.json({ 'status': 420 })
