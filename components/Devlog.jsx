@@ -4,14 +4,14 @@ import Image from 'next/image'
 const Devlog = ({ user, project, text, images, hours }) => {
   const [hour, minutes] = hoursConverter(hours)
   return (
-    <div className='text-white tracking-tight leading-6  border-4 sm:border-10 text-base sm:text-lg max-w-180 mx-auto shadow-2xl border-[hsl(68,48%,67%)] rounded-3xl py-5 sm:py-8 px-5 sm:px-10 bg-[#73a541]'>
+    <div className='text-white tracking-tight leading-6 w-full  border-4 sm:border-10 text-base sm:text-lg max-w-180 mx-auto shadow-2xl border-[hsl(68,48%,67%)] rounded-3xl py-5 sm:py-8 px-5 sm:px-10 bg-[#73a541]'>
       <div className='flex gap-3 sm:gap-4 items-center'>
         <div className='rounded-full bg-white h-8 w-8 sm:h-9 sm:w-9 shrink-0'></div>
         <div>
           <div className='text-[15px] sm:text-[17px]'>
             {user} <span className='text-neutral-200/70'>worked on</span> {project}
           </div>
-          <div className='text-neutral-200/70 text-[14px] sm:text-[17px]'>
+          <div className='text-neutral-200/70 font-extralight text-[14px] sm:text-[17px]'>
             {hour}h {minutes}m worked
           </div>
         </div>

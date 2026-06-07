@@ -5,6 +5,8 @@ import React, { useState, useEffect } from "react";
 import ProjectBanner from "@/components/ProjectBanner";
 import { FaStar, FaPaperPlane } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+
 const criteria = [
   {
     key: "technicality",
@@ -117,12 +119,13 @@ export default function Page() {
   if (!project) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-white text-center">
-          <div className="text-4xl mb-3">🍪</div>
-          <div className="text-xl font-bold text-[rgb(249,229,197)]">
-            No projects to vote on right now
+        <div className=" text-center">
+          <Image src="/image.png" alt="ft_logo" width={200} height={200} />
+                  
+          <div className="text-2xl text-[rgb(78,44,51)]">
+            You need to ship a project to vote!
           </div>
-          <div className="text-[rgb(215,181,147)] mt-2">Check back later!</div>
+          <div className="mt-2 text-sm text-[rgb(122,108,94)]">Check back later!</div>
         </div>
       </div>
     );

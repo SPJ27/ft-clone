@@ -1,3 +1,4 @@
+import Devlog from "@/components/Devlog";
 import Title from "@/components/Title";
 import { hoursConverter } from "@/lib/converter";
 import { createClient } from "@/supabase/server";
@@ -100,26 +101,26 @@ const page = async () => {
     <div className="flex w-full min-h-screen md:pl-24 lg:pl-28 pb-24 md:pb-8">
       <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
         <Title text="Explore Projects" />
-
         {projects?.length > 0 ? (
-          <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-x-8 md:gap-x-12 lg:gap-x-16 gap-y-8 sm:gap-y-10 md:gap-y-12 lg:gap-y-14 mt-8 sm:mt-10 md:mt-12">
-            {projects.map((project, i) => (
-              <ProjectBanner key={project.id ?? i} {...project} />
-            ))}
+          <div className="w-full grid grid-cols-1 gap-x-8 md:gap-x-12 lg:gap-x-16 gap-y-8 sm:gap-y-10 md:gap-y-12 lg:gap-y-14 mt-8 sm:mt-10 md:mt-12">
+            {projects.map((project, i) =>
+              project.devlogs.map((devlog, j) => (
+                <Devlog
+                  key={`${project.id}-${devlog.id}-${i}-${j}`}
+                  user={project.user_name}
+                  project={project.project_name}
+                  text={devlog.devlog_texts}
+                  images={devlog.devlog_images}
+                  hours={devlog.hours}
+                />
+              )),
+            )}
           </div>
         ) : (
           <div className="text-center text-[rgb(249,229,197)] opacity-60 mt-24 text-lg">
             No projects yet.
           </div>
         )}
-        <div className="col-span-full flex justify-center mt-4">
-          <Link
-            href="/projects/new"
-            className="flex text-[rgb(245,216,198)] bg-[rgb(78,44,51)] justify-center items-center py-4 sm:py-5 px-8 text-lg sm:text-xl rounded-lg h-12 sm:h-10 gap-2 w-full max-w-xs"
-          >
-            + New Project
-          </Link>
-        </div>
       </div>
     </div>
   );
