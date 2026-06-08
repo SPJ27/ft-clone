@@ -42,6 +42,7 @@ const ProjectBanner = ({
   shipStatus,
   isCurrentUserCreated,
   showShipButton = true,
+  reviewerNote
 }) => {
   const status = shipStatus ? statusConfig[shipStatus] : null;
 
@@ -75,11 +76,18 @@ const ProjectBanner = ({
           </div>
         </div>
         {status && (
-          <span
-            className={`shrink-0 mt-1 text-[13px] sm:text-[14.5px] font-semibold px-3 py-1 rounded-full ${status.classes}`}
-          >
-            {status.label}
-          </span>
+          <div className="relative group shrink-0 mt-1">
+            <span
+              className={`text-[13px] sm:text-[14.5px] font-semibold px-3 py-1 rounded-full cursor-default ${status.classes}`}
+            >
+              {status.label}
+            </span>
+            {reviewerNote && shipStatus !== 'PENDING' && (
+              <div className="absolute right-0 top-full mt-2 z-10 w-56 bg-[rgb(48,27,31)] border border-white/10 text-white text-sm rounded-lg px-3 py-2 leading-snug shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-150">
+                {reviewerNote}
+              </div>
+            )}
+          </div>
         )}
       </div>
       <div className="flex justify-between flex-wrap px-2 sm:px-3 text-[14px] sm:text-[16px] mt-3 font-medium text-[rgb(215,181,147)] gap-5 sm:gap-10">

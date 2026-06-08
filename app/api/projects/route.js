@@ -159,7 +159,7 @@ export async function GET(request) {
     !!projectData.project_demo?.trim() &&
     !!projectData.project_repo?.trim() &&
     (projectData.total_hours ?? 0) > 0
-
+  
   return NextResponse.json({ projectData, canShip, shipEvents, isCurrentUserCreated })
 }
 

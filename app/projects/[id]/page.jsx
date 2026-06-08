@@ -16,9 +16,9 @@ const Page = async ({ params }) => {
   const { projectData, canShip, isCurrentUserCreated, shipEvents } = await res.json()
   const [hours, minutes] = hoursConverter(projectData.total_hours)
   const latestShipStatus = shipEvents?.length > 0
-    ? shipEvents.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))[0].approved
+    ? shipEvents.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))[0]
     : null
-
+  console.log(latestShipStatus)
   return (
     <div className='p-5 md:ml-12 md:mt-12 min-h-screen'>
       <ProjectBanner
@@ -33,7 +33,8 @@ const Page = async ({ params }) => {
         minutes={minutes}
         image={projectData.banner_url}
         user={projectData.user_name}
-        shipStatus={latestShipStatus}
+        shipStatus={latestShipStatus.approved}
+        reviewerNote={latestShipStatus.reviewer_note}
         isCurrentUserCreated={isCurrentUserCreated}
         showShipButton={isCurrentUserCreated}
       />
