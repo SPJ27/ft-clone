@@ -11,6 +11,7 @@ import {
   FaUtensils,
   FaShip,
   FaSignOutAlt,
+  FaBook,
 } from "react-icons/fa";
 
 const navItems = [
@@ -21,6 +22,7 @@ const navItems = [
   { icon: <FaStar />, label: "Vote", to: "/vote" },
   { icon: <FaShoppingCart />, label: "Shop", to: "/shop" },
   { icon: <FaShip />, label: "Shipwright", to: "/shipwright" },
+  { icon: <FaBook />, label: "Docs", to: "/docs" },
 ];
 
 const Sidebar = () => {
@@ -55,7 +57,7 @@ const Sidebar = () => {
     `,
             backgroundSize: "100px 100px",
           }}
-          className="w-30 group-hover:w-64 transition-[width] duration-300 ease-in-out bg-[#4f8fba] text-[rgb(249,229,197)] flex flex-col rounded-2xl overflow-hidden h-138"
+          className="w-30 group-hover:w-64 transition-[width] duration-300 ease-in-out bg-[#4f8fba] text-[rgb(249,229,197)] flex flex-col rounded-2xl overflow-hidden h-153"
         >
           <div className="flex flex-col flex-1 py-6">
             {navItems.map(({ icon, label, to }) => {
