@@ -120,7 +120,7 @@ export default function Page() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className=" text-center">
-          <Image src="/image.png" alt="ft_logo" width={200} height={200} />
+          <Image src="/image.png" alt="ft_logo" width={200} height={200} className="mx-auto"  />
                   
           <div className="text-2xl text-[rgb(78,44,51)]">
             You need to ship a project to vote!

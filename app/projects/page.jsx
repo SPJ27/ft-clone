@@ -27,6 +27,7 @@ const ProjectBanner = ({
             src={image}
             alt={`${title} banner`}
             fill
+            unoptimized
             sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 400px"
             className="object-cover object-top z-0"
           />

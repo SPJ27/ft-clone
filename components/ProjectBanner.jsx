@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -6,7 +7,9 @@ import {
   FaFileAlt,
   FaGithub,
   FaGlobe,
+  FaPencilAlt,
   FaRocket,
+  FaTrash,
 } from "react-icons/fa";
 
 const statusConfig = {
@@ -37,6 +40,7 @@ const ProjectBanner = ({
   minutes,
   canShip,
   shipStatus,
+  isCurrentUserCreated,
   showShipButton = true,
 }) => {
   const status = shipStatus ? statusConfig[shipStatus] : null;
@@ -78,14 +82,47 @@ const ProjectBanner = ({
           </span>
         )}
       </div>
-      <div className="flex flex-wrap px-2 sm:px-3 text-[14px] sm:text-[16px] mt-3 font-medium text-[rgb(215,181,147)] gap-5 sm:gap-10">
-        <span className="flex gap-1 items-center">
-          <FaClock /> Hours: {hours}h {minutes}m
-        </span>
-        <span className="flex gap-1 items-center">
-          <FaFileAlt /> Devlogs: {devlogs}
-        </span>
+      <div className="flex justify-between flex-wrap px-2 sm:px-3 text-[14px] sm:text-[16px] mt-3 font-medium text-[rgb(215,181,147)] gap-5 sm:gap-10">
+        <div className="flex gap-5">
+          <span className="flex gap-1 items-center">
+            <FaClock /> Hours: {hours}h {minutes}m
+          </span>
+          <span className="flex gap-1 items-center">
+            <FaFileAlt /> Devlogs: {devlogs}
+          </span>
+        </div>
+
+        {isCurrentUserCreated && (
+          <div className="flex gap-3 items-center justify-center">
+            <div
+              onClick={async () => {
+                const confirmDelete = confirm(
+                  "Are you sure you want to delete this project? This action cannot be undone.",
+                );
+                if (!confirmDelete) return;
+                const res = await fetch("/api/projects/", {
+                  method: "DELETE",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ id }),
+                });
+                if (res.ok) {
+                  alert("Project deleted successfully");
+                  window.location.href = "/projects";
+                } else {
+                  alert("Failed to delete project");
+                }
+              }}
+              className="flex gap-1 items-center"
+            >
+              <FaTrash className="h-8 w-8 rounded-md text-xs bg-red-500 cursor-pointer hover:bg-red-600 text-white p-2" />
+            </div>
+            <Link href={`/projects/edit/${id}`} className="flex gap-1 items-center">
+              <FaPencilAlt className="h-8 w-8 rounded-md text-xs bg-blue-500 cursor-pointer hover:bg-blue-600 text-white p-2" />
+            </Link>
+          </div>
+        )}
       </div>
+
       <div className="px-2 sm:px-3 text-[1rem] sm:text-[1.19rem] mt-3 leading-tight flex-1 font-medium text-[rgb(249,229,197)]">
         {desc}
       </div>

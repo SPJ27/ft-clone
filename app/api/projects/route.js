@@ -71,8 +71,8 @@ export async function PUT(request) {
     .select('user_id')
     .eq('id', id)
     .single()
-
-  if (existing?.user_id !== userData.hackclub_id) {
+  console.log(existing, userData.hackclub_id)
+  if (existing?.user_id !== parseInt(userData.hackclub_id)) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 })
   }
 
@@ -109,7 +109,7 @@ export async function DELETE(request) {
     .eq('id', id)
     .single()
 
-  if (existing?.user_id !== userData.hackclub_id) {
+  if (existing?.user_id !== parseInt(userData.hackclub_id)) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 })
   }
 

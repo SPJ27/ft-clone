@@ -20,10 +20,9 @@ const Page = async ({ params }) => {
     : null
 
   return (
-    <div className='p-5'>
+    <div className='p-5 md:ml-12 md:mt-12 min-h-screen'>
       <ProjectBanner
         id={id}
-        showShipButton={isCurrentUserCreated}
         canShip={canShip}
         title={projectData.project_name}
         devlogs={projectData.devlogs.length}
@@ -35,6 +34,8 @@ const Page = async ({ params }) => {
         image={projectData.banner_url}
         user={projectData.user_name}
         shipStatus={latestShipStatus}
+        isCurrentUserCreated={isCurrentUserCreated}
+        showShipButton={isCurrentUserCreated}
       />
       {isCurrentUserCreated && (
         <div className='mx-auto mt-6 flex max-w-250'>
